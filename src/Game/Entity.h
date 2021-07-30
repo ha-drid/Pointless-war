@@ -9,7 +9,7 @@
 #include <colision.h>
 #include <math.h>
 
-#include "World/VoxelWorld.h"
+#include "VoxelWorld.h"
 
 #define ENTITY_FORWARD 0
 #define ENTITY_BACKWARD 1

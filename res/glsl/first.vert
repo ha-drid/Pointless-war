@@ -5,8 +5,10 @@ attribute vec3 position;
 
 uniform vec3 camera_direction;
 uniform vec3 camera_position;
-uniform vec3 u_translatef;
 uniform vec3 u_rotate;
+uniform mat4 u_model;
+uniform mat4 u_view;
+uniform mat4 u_projection;
 uniform float angle_radians;
 uniform vec3 positionInstances[670];
 uniform vec3 colorInstances[670];
@@ -15,23 +17,17 @@ uniform vec3 colorInstances[670];
 out vec4 pass_color;
 
 //	functions
-mat4 lookAt(vec3 eye, vec3 center, vec3 up);
-mat4 perpective(float angle_radians, float ratio, float near, float far);
-mat4 translate(vec3 vector);
 mat4 setMat4Value(float x);
 mat4 rotate(mat4 matrix, float angle, vec3 vector);
-
-mat4 projection = perpective(((3.14 / 180.0) * 45), 4.0 / 3.0, 0.1, 200);
 
 // 
 void main()
 {	
-	mat4 model = translate(u_translatef);
-	mat4 view = lookAt(camera_position,
+	/*mat4 view = lookAt(camera_position,
 	       		   camera_direction,
 			       vec3(0, 1, 0));
-				   
-	mat4 mvp = projection * view * model;
+		*/		   
+	mat4 mvp = u_projection * u_view * u_model;
 	
 	gl_Position = mvp * vec4(position + positionInstances[gl_InstanceID], 1);
 	pass_color = vec4(colorInstances[gl_InstanceID], 1);
@@ -75,53 +71,6 @@ mat4 setMat4Value(float x)
 	result[1] = vec4(0, x, 0, 0);
 	result[2] = vec4(0, 0, x, 0);
 	result[3] = vec4(0, 0, 0, x);
-	
-	return result;
-}
-
-mat4 translate(vec3 vector)
-{
-	mat4 matrix = mat4(1.0);
-	
-	matrix[3][0] = vector.x;
-	matrix[3][1] = vector.y;
-	matrix[3][2] = vector.z;
-	
-	return matrix;
-}
-
-mat4 perpective(float angle_radians, float ratio, float near, float far)
-{
-	float tanHalfFovy = tan(angle_radians / 2.0);
-
-	mat4 result = setMat4Value(0);
-	result[0][0] = 1.0 / (ratio * tanHalfFovy);
-	result[1][1] = 1.0 / (tanHalfFovy);
-	result[2][2] = - (far + near) / (far - near);
-	result[2][3] = - 1;
-	result[3][2] = - (2 * far * near) / (far - near);
-	return result;
-}
-
-mat4 lookAt(vec3 eye, vec3 center, vec3 up)
-{
-	vec3 f = normalize(center - eye);
-	vec3 s = normalize(cross(f, up));
-	vec3 u = cross(s, f);
-
-	mat4 result = setMat4Value(1);
-	result[0][0] = s.x;
-	result[1][0] = s.y;
-	result[2][0] = s.z;
-	result[0][1] = u.x;
-	result[1][1] = u.y;
-	result[2][1] = u.z;
-	result[0][2] =-f.x;
-	result[1][2] =-f.y;
-	result[2][2] =-f.z;
-	result[3][0] =-dot(s, eye);
-	result[3][1] =-dot(u, eye);
-	result[3][2] = dot(f, eye);
 	
 	return result;
 }

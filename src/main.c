@@ -11,6 +11,7 @@
 #include "Utility.h"
 #include "Game.h"
 #include "World.h"
+#include "MVP.h"
 
 #include "SDL/Window.h"
 
@@ -20,10 +21,10 @@
 
 #include "Util/matrix.h"
 
-#include "Game/World/Chunk.h"
-#include "Game/World/Chunks.h"
-#include "Game/World/VoxelInstance.h"
-#include "Game/World/VoxelWorld.h"
+#include "Game/Voxels/Chunk.h"
+#include "Game/Voxels/Chunks.h"
+#include "Game/Voxels/VoxelInstance.h"
+#include "Game/VoxelWorld.h"
 
 #include "Game/Entity.h"
 
@@ -41,9 +42,15 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
     struct Game game;
     gameProgramInit(&game, "res\\glsl\\first.vert", "res\\glsl\\first.frag", &globalManager);
-    gameRenderInit(&game, "position", 3, NULL, NULL, cube_position, &globalManager);
-    gameVoxelWorldInit(&game, 3, 3, 3, &globalManager);
+    gameRenderInit(&game, "position", 3, NULL, NULL, VOXEL_POSITION, &globalManager);
+    gameVoxelWorldInit(&game, 50, 10, 50, &globalManager);
     gameCameraInit(&game, 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 1.0f, &globalManager);
+    gameDrawingDistance(&game, 20.0f, 10.0f, 20.0f);
+
+    struct MVP mvp;
+    mvpInit(&mvp);
+    mvpSetProjection(&mvp, radians_s(45.0f), 4.0f / 3.0f, 0.1, 150.0f);
+    globalManager.program.setMat4fv(&(game.shader), "u_projection", 1, GL_FALSE, mvp.projection.data);
 
     bool run = true;
     while (run)
@@ -83,33 +90,21 @@ int WINAPI WinMain (HINSTANCE hInstance, HINSTANCE hPrevInstance, LPSTR lpCmdLin
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glClearColor(1.0f, 1.0f, 0.0f, 1.0f);
-
+/*
         globalManager.cameraGL.apply(&(game.shader),
                                      &(globalManager.program),
                                      &(game.camera),
-                                     "camera_position",
+                                     "u_view",
                                      "camera_direction");
-
-        gameDraw(&game, cube_index, 6, "positionInstances", "colorInstances", "u_translatef", &globalManager);
-        /*uint32_t index = 0;
-        for (uint32_t z = 0; z < game.world.world.chunks.countZ; ++z) {
-            for (uint32_t y = 0; y < game.world.world.chunks.countY; ++y) {
-                for (uint32_t x = 0; x <  game.world.world.chunks.countX; ++x) {
-
-                    globalManager.program.setVec3f(&(game.shader), "u_translatef", x * 8, y * 8, z * 8);
-                    globalManager.program.setVec3fArray(&(game.shader), "positionInstances",  game.world.mesh[index].voxel_size, game.world.mesh[index].positionInstances);
-                    globalManager.program.setVec3fArray(&(game.shader), "colorInstances", game.world.mesh[index].voxel_size, game.world.mesh[index].colorInstances);
-
-                    globalManager.render.drawInstanced(&(game.render), GL_TRIANGLES, 6, GL_UNSIGNED_INT, cube_index,game.world.mesh[index].voxel_size);
-                    // globalManager.render.draw(&render, GL_TRIANGLES, 6, GL_UNSIGNED_INT, cube_index);
-                    ++index;
-                }
-            }
-        }
 */
+        mvpSetView(&mvp, &(game.camera), &(globalManager.vector3f));
+        globalManager.program.setMat4fv(&(game.shader), "u_view", 1, GL_FALSE, mvp.view.data);
+
+        gameDraw(&game, VOXEL_INDEX, 6, &(mvp.model), "positionInstances", "colorInstances", "u_model", &globalManager);
+
         globalManager.windowGL.swap(window);
     }
-
+    mvpDelete(&mvp);
     gameDelete(&game, &globalManager);
     globalManager.windowGL.delete(&window);
 

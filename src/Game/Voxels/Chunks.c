@@ -48,6 +48,16 @@ void chunksInit(struct Chunks* chunks,
     }
 }
 
+bool chunksIsThereAChunk(struct Chunks* chunks, int x, int y, int z)
+{
+    if ((x < 0) || (x >= chunks->chunks.countX) ||
+        (y < 0) || (y >= chunks->chunks.countY) ||
+        (z < 0) || (z >= chunks->chunks.countZ))
+        return false;
+
+    return true;
+}
+
 void chunksDelete(struct Chunks* chunks, struct ChunkManager* manager)
 {
     for (uint32_t z = 0; z < chunks->chunks.countZ; ++z) {
@@ -79,6 +89,7 @@ struct ChunksManager chunksManagerInit()
 {
     struct ChunksManager manager;
     manager.init = &chunksInit;
+    manager.isThereAChunk = &chunksIsThereAChunk;
     manager.delete = &chunksDelete;
     return manager;
 };

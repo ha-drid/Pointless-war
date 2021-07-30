@@ -3,7 +3,7 @@
 
 #include <stdint-gcc.h>
 
-static const float cube_position[18] = {
+static const float VOXEL_POSITION[18] = {
                      0.0f, 1.0f, 0.0f,
 
                      1.0f, 0.0f, 0.0f,
@@ -13,7 +13,7 @@ static const float cube_position[18] = {
                      0.0f, 0.0f,-1.0f,
 };
 
-static const uint32_t cube_index[6] = {
+static const uint32_t VOXEL_INDEX[6] = {
                      0, 1, 2,
                      0, 3, 4
                      /*0,1,2,  0,2,3,

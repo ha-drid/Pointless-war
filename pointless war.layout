@@ -2,44 +2,14 @@
 <CodeBlocks_layout_file>
 	<FileVersion major="1" minor="0" />
 	<ActiveTarget name="Debug" />
-	<File name="src\Game\World\Voxel.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\glad.c" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="133" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src\Game.c" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1749" topLine="33" />
-		</Cursor>
-	</File>
-	<File name="src\GL\Program.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="726" topLine="15" />
-		</Cursor>
-	</File>
-	<File name="src\Util\dynamic_array.c" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="26" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src\GL\CameraGL.h" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="127" topLine="4" />
-		</Cursor>
-	</File>
-	<File name="src\main.c" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="2920" topLine="74" />
+			<Cursor1 position="3693" topLine="531" />
 		</Cursor>
 	</File>
 	<File name="src\GL\Render.c" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="1284" topLine="36" />
-		</Cursor>
-	</File>
-	<File name="src\Util\matrix.h" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="515" topLine="15" />
 		</Cursor>
 	</File>
 	<File name="src\Util\Model3D.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -49,12 +19,7 @@
 	</File>
 	<File name="src\main.h" open="1" top="0" tabpos="2" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1108" topLine="5" />
-		</Cursor>
-	</File>
-	<File name="src\Game\World\Chunks.c" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="28" topLine="15" />
+			<Cursor1 position="358" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="src\Util\dynamic_array.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -62,69 +27,39 @@
 			<Cursor1 position="184" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\Game\World\Chunk.c" open="0" top="0" tabpos="15" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\Game.c" open="1" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="22" topLine="0" />
+			<Cursor1 position="4089" topLine="88" />
 		</Cursor>
 	</File>
-	<File name="src\GL\CameraGL.c" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\main.c" open="1" top="1" tabpos="1" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="318" topLine="5" />
+			<Cursor1 position="526" topLine="21" />
 		</Cursor>
 	</File>
-	<File name="src\SDL\Window.c" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+	<File name="src\Util\dynamic_array.c" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="661" topLine="0" />
+			<Cursor1 position="26" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\Game\World\Chunks.h" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\GL\Program.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="930" topLine="21" />
+			<Cursor1 position="852" topLine="15" />
 		</Cursor>
 	</File>
-	<File name="src\Game\World\VoxelInstance.c" open="0" top="0" tabpos="16" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\World.h" open="1" top="0" tabpos="12" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1600" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="src\Util\matrix.c" open="0" top="0" tabpos="0" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="259" topLine="0" />
-		</Cursor>
-	</File>
-	<File name="libs\include\glad\glad.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="119767" topLine="2865" />
-		</Cursor>
-	</File>
-	<File name="src\Game\World\VoxelWorld.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="593" topLine="24" />
-		</Cursor>
-	</File>
-	<File name="src\Game\World\VoxelWorld.c" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1645" topLine="35" />
-		</Cursor>
-	</File>
-	<File name="src\Util\vec3.c" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="1265" topLine="48" />
-		</Cursor>
-	</File>
-	<File name="src\glad.c" open="0" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="3693" topLine="531" />
-		</Cursor>
-	</File>
-	<File name="src\GL\Render.h" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
-		<Cursor>
-			<Cursor1 position="777" topLine="20" />
+			<Cursor1 position="186" topLine="0" />
 		</Cursor>
 	</File>
 	<File name="src\Util\vec3.h" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="130" topLine="11" />
+			<Cursor1 position="480" topLine="2" />
+		</Cursor>
+	</File>
+	<File name="src\GL\Program.c" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="3966" topLine="118" />
 		</Cursor>
 	</File>
 	<File name="src\SDL\Window.h" open="0" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
@@ -132,44 +67,79 @@
 			<Cursor1 position="456" topLine="4" />
 		</Cursor>
 	</File>
-	<File name="src\Utility.h" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\Utility.h" open="1" top="0" tabpos="13" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="372" topLine="14" />
+			<Cursor1 position="300" topLine="5" />
 		</Cursor>
 	</File>
-	<File name="src\Util\Model3D.c" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="libs\include\glad\glad.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="647" topLine="7" />
+			<Cursor1 position="119767" topLine="2865" />
 		</Cursor>
 	</File>
-	<File name="src\Game\World\Chunk.h" open="0" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\Game\VoxelWorld.h" open="1" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="207" topLine="0" />
+			<Cursor1 position="293" topLine="0" />
 		</Cursor>
 	</File>
-	<File name="src\Utility.c" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\Util\Model3D.c" open="1" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="675" topLine="10" />
+		</Cursor>
+	</File>
+	<File name="src\MVP.c" open="1" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="16" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\Utility.c" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
 			<Cursor1 position="149" topLine="2" />
 		</Cursor>
 	</File>
-	<File name="src\Game\Entity.h" open="0" top="0" tabpos="3" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\Util\matrix.h" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="504" topLine="12" />
+			<Cursor1 position="1008" topLine="17" />
 		</Cursor>
 	</File>
-	<File name="src\GL\Program.c" open="0" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\GL\CameraGL.h" open="1" top="0" tabpos="4" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="2615" topLine="97" />
+			<Cursor1 position="127" topLine="4" />
 		</Cursor>
 	</File>
-	<File name="src\Game.h" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\Util\matrix.c" open="1" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="1390" topLine="28" />
+			<Cursor1 position="2234" topLine="68" />
 		</Cursor>
 	</File>
-	<File name="src\Game\World\VoxelInstance.h" open="0" top="0" tabpos="8" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+	<File name="src\Game.h" open="1" top="0" tabpos="7" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
 		<Cursor>
-			<Cursor1 position="713" topLine="7" />
+			<Cursor1 position="369" topLine="13" />
+		</Cursor>
+	</File>
+	<File name="src\SDL\Window.c" open="0" top="0" tabpos="6" split="0" active="1" splitpos="0" zoom_1="-1" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="661" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\GL\Render.h" open="0" top="0" tabpos="11" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="777" topLine="20" />
+		</Cursor>
+	</File>
+	<File name="src\Util\vec3.c" open="0" top="0" tabpos="9" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1228" topLine="0" />
+		</Cursor>
+	</File>
+	<File name="src\GL\CameraGL.c" open="1" top="0" tabpos="5" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="1443" topLine="48" />
+		</Cursor>
+	</File>
+	<File name="src\MVP.h" open="1" top="0" tabpos="10" split="0" active="1" splitpos="0" zoom_1="0" zoom_2="0">
+		<Cursor>
+			<Cursor1 position="108" topLine="0" />
 		</Cursor>
 	</File>
 </CodeBlocks_layout_file>

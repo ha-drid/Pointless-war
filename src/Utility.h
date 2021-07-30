@@ -11,8 +11,8 @@
 #include "GL/Program.h"
 #include "Util/matrix.h"
 #include "GL/CameraGL.h"
-#include "Game/World/Chunk.h"
-#include "Game/World/VoxelWorld.h"
+#include "Game/Voxels/Chunk.h"
+#include "Game/VoxelWorld.h"
 
 struct GlobalManager
 {

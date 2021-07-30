@@ -34,6 +34,7 @@ struct ChunksManager
                 uint32_t height_chunk,
                 uint32_t depth_chunk,
                 struct ChunkManager* manager);
+    bool (*isThereAChunk)(struct Chunks* chunks, int x, int y, int z);
     void (*delete)(struct Chunks* chunks, struct ChunkManager* manager);
 };
 

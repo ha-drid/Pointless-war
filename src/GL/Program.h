@@ -26,7 +26,7 @@ struct ProgramManager
     void (*setInt)(Program* program, const char* name, int x);
 
     void (*use)(Program* program);
-
+    void (*setMat4fv)(struct Program* program, const char* name, GLsizei count, GLboolean transpose, const GLfloat *value);
     GLint (*getUniformLocation)(Program* program, const char* name);
     GLint (*getAttribLocation)(Program* program, const char* name);
     void (*delete)(Program* program);

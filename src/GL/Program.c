@@ -107,6 +107,10 @@ void programSetInt(Program* program, const char* name, int x)
     glUniform1i(programGetUniformLocation(program, name), x);
 }
 
+void programSetMat4fv(struct Program* program, const char* name, GLsizei count, GLboolean transpose, const GLfloat *value)
+{
+    glUniformMatrix4fv(programGetUniformLocation(program, name), count, transpose, value);
+}
 void programSetVec3fArray(struct Program* program, const char* name, GLsizei count, const GLfloat* value)
 {
     glUniform3fv(programGetUniformLocation(program, name), count, value);
@@ -130,6 +134,6 @@ struct ProgramManager programManagerInit()
     manager.init = &programInit;
     manager.getAttribLocation = &programGetAttribLocation;
     manager.getUniformLocation = &programGetUniformLocation;
-
+    manager.setMat4fv = &programSetMat4fv;
     return manager;
 }

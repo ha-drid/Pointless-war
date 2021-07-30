@@ -13,11 +13,11 @@
 
 #include "Util/matrix.h"
 
-#include "Game/World/Chunk.h"
-#include "Game/World/Chunks.h"
-#include "Game/World/VoxelInstance.h"
-#include "Game/World/VoxelWorld.h"
-
+#include "Game/Voxels/Chunk.h"
+#include "Game/Voxels/Chunks.h"
+#include "Game/Voxels/VoxelInstance.h"
+#include "Game/VoxelWorld.h"
+#include "Util/vec3.h"
 #include "Game/Entity.h"
 
 struct Game
@@ -26,6 +26,7 @@ struct Game
     struct Render render;
     struct VoxelWorld world;
     struct CameraGL camera;
+    struct vec3f drawingDistance;
 };
 
 void gameProgramInit(struct Game* game, const char* vert, const char* frag, struct GlobalManager* manager);
@@ -46,13 +47,14 @@ void gameCameraInit(struct Game* game,
                     float yAngle,
                     float speed,
                     struct GlobalManager* manager);
-
+void gameDrawingDistance(struct Game* game, float x_size, float y_size, float z_size);
 void gameDraw(struct Game* game,
               unsigned* indeces,
               uint32_t indeces_size,
+              struct Matrix* model,
               const char* positionInstance,
               const char* colorInstance,
-              const char* translate,
+              const char* model_name,
               struct GlobalManager* manager);
 void gameDelete(struct Game* game, struct GlobalManager* manager);
 

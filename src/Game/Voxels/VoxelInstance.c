@@ -11,23 +11,26 @@ void voxelInstanceInit(struct VoxelInstance* mesh, uint32_t max_voxel_size)
 
 void voxelInstanceUpdate(struct VoxelInstance* mesh,
                          struct Chunk* chunk,
+                         uint32_t x,
+                         uint32_t y,
+                         uint32_t z,
                          uint32_t chunk_width,
                          uint32_t chunk_height,
                          uint32_t chunk_depth,
                          float (*getVoxelColor)(struct Voxel vox, uint32_t index))
 {
     uint32_t index = 0;
-    for (uint32_t z = 0; z < chunk_depth; ++z)
+    for (uint32_t iZ = 0; iZ < chunk_depth; ++iZ)
     {
-        for (uint32_t y = 0; y < chunk_height; ++y)
+        for (uint32_t iY = 0; iY < chunk_height; ++iY)
         {
-            for (uint32_t x = 0; x < chunk_width; ++x)
+            for (uint32_t iX = 0; iX < chunk_width; ++iX)
             {
                 if (chunk->voxels[index].iD != 0)
                 {
-                    mesh->positionInstances[(index * 3) + 0] = x;
-                    mesh->positionInstances[(index * 3) + 1] = y;
-                    mesh->positionInstances[(index * 3) + 2] = z;
+                    mesh->positionInstances[(index * 3) + 0] = iX;
+                    mesh->positionInstances[(index * 3) + 1] = iY;
+                    mesh->positionInstances[(index * 3) + 2] = iZ;
 
                     mesh->colorInstances[(index * 3) + 0] = getVoxelColor(chunk->voxels[index], 0); // red
                     mesh->colorInstances[(index * 3) + 1] = getVoxelColor(chunk->voxels[index], 1); // green

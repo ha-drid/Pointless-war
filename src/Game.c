@@ -1,4 +1,5 @@
 #include "Game.h"
+#include "Util/matrix.h"
 
 void gameProgramInit(struct Game* game, const char* vert, const char* frag, struct GlobalManager* manager)
 {
@@ -49,47 +50,80 @@ void gameCameraInit(struct Game* game,
     manager->cameraGL.init(&(game->camera), x, y, z, xAngle, yAngle, speed);
 };
 
+void gameChunkDraw(struct Game* game,
+                   uint32_t chunkID,
+                   unsigned* indeces,
+                   uint32_t indeces_size,
+                   const char* positionInstance,
+                   const char* colorInstance,
+                   struct ProgramManager* program,
+                   struct RenderManager* render)
+{
+    program->setVec3fArray(&(game->shader),
+                            positionInstance,
+                            game->world.mesh[chunkID].voxel_size,
+                            game->world.mesh[chunkID].positionInstances);
+
+    program->setVec3fArray(&(game->shader),
+                            colorInstance,
+                            game->world.mesh[chunkID].voxel_size,
+                            game->world.mesh[chunkID].colorInstances);
+
+    render->drawInstanced(&(game->render),
+                         GL_TRIANGLES,
+                         indeces_size,
+                         GL_UNSIGNED_INT,
+                         indeces,
+                         game->world.mesh[chunkID].voxel_size);
+}
+
 void gameDraw(struct Game* game,
               unsigned* indeces,
               uint32_t indeces_size,
+              struct Matrix* model,
               const char* positionInstance,
               const char* colorInstance,
-              const char* translate,
+              const char* model_name,
               struct GlobalManager* manager)
 {
-    uint32_t index = 0;
-    for (uint32_t z = 0; z < game->world.world.chunks.countZ; ++z) {
-        for (uint32_t y = 0; y < game->world.world.chunks.countY; ++y) {
-            for (uint32_t x = 0; x < game->world.world.chunks.countX; ++x) {
+    int X = ((int)round(game->camera.x) - ((int)round(game->camera.x) % game->world.world.chunk_width)) / game->world.world.chunk_width;
+    int Y = ((int)round(game->camera.y) - ((int)round(game->camera.y) % game->world.world.chunk_height)) / game->world.world.chunk_height;
+    int Z = ((int)round(game->camera.z) - ((int)round(game->camera.z) % game->world.world.chunk_depth)) / game->world.world.chunk_depth;
 
-                manager->program.setVec3f(&(game->shader),
-                                               translate,
-                                               x * 8,
-                                               y * 8,
-                                               z * 8);
+    for (int z = Z - game->drawingDistance.z; z < Z + game->drawingDistance.z; ++z) {
+    for (int y = Y - game->drawingDistance.y; y < Y + game->drawingDistance.y; ++y) {
+    for (int x = X - game->drawingDistance.x; x < X + game->drawingDistance.x; ++x) {
+                if (manager->chunks.isThereAChunk(&(game->world.world), x, y, z))
+                {
+                    matrixTranslate3f(model, x * 8, y * 8, z * 8);
 
-                manager->program.setVec3fArray(&(game->shader),
-                                                    positionInstance,
-                                                    game->world.mesh[index].voxel_size,
-                                                    game->world.mesh[index].positionInstances);
+                    manager->program.setMat4fv(&(game->shader), model_name, 1, GL_FALSE, model->data);
 
-                manager->program.setVec3fArray(&(game->shader),
-                                                    colorInstance,
-                                                    game->world.mesh[index].voxel_size,
-                                                    game->world.mesh[index].colorInstances);
+                    int index = x +
+                                (y * game->world.world.chunks.countX) +
+                                (z * (game->world.world.chunks.countX * game->world.world.chunks.countY));
 
-                manager->render.drawInstanced(&(game->render),
-                                                   GL_TRIANGLES,
-                                                   indeces_size,
-                                                   GL_UNSIGNED_INT,
-                                                   indeces,
-                                                   game->world.mesh[index].voxel_size);
-                // globalManager.render.draw(&render, GL_TRIANGLES, 6, GL_UNSIGNED_INT, cube_index);
-                ++index;
-            }
-        }
+                    gameChunkDraw(game,
+                                index,
+                                indeces,
+                                indeces_size,
+                                positionInstance,
+                                colorInstance,
+                                &(manager->program),
+                                &(manager->render));
+
+                }
+    }
+    }
     }
 };
+
+void gameDrawingDistance(struct Game* game, float x_size, float y_size, float z_size)
+{
+    game->drawingDistance.x = x_size;
+    game->drawingDistance.y = y_size;
+    game->drawingDistance.z = z_size;
+}
 
 void gameDelete(struct Game* game, struct GlobalManager* manager)
 {

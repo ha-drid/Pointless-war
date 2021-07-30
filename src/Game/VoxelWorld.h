@@ -8,10 +8,10 @@
 #include <stdint-gcc.h>
 #include <malloc.h>
 
-#include "Voxel.h"
-#include "Chunk.h"
-#include "Chunks.h"
-#include "VoxelInstance.h"
+#include "Voxels/Voxel.h"
+#include "Voxels/Chunk.h"
+#include "Voxels/Chunks.h"
+#include "Voxels/VoxelInstance.h"
 
 struct VoxelWorld
 {
