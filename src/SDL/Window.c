@@ -1,5 +1,6 @@
 #include "Window.h"
-void WindowGLinit(WindowGL* windowGL, const char* name, int width, int height, unsigned sdl_flags)
+
+static void WindowGLinit(WindowGL* windowGL, const char* name, int width, int height, unsigned sdl_flags)
 {
     windowGL->window = SDL_CreateWindow(name,
                                    SDL_WINDOWPOS_UNDEFINED,
@@ -11,13 +12,13 @@ void WindowGLinit(WindowGL* windowGL, const char* name, int width, int height, u
     windowGL->contex = SDL_GL_CreateContext(windowGL->window);
 }
 
-void WindowGLdelete(WindowGL* windowGL)
+static void WindowGLdelete(WindowGL* windowGL)
 {
     SDL_GL_DeleteContext(windowGL->contex);
     SDL_DestroyWindow(windowGL->window);
 }
 
-void WindowGLswap(WindowGL windowGL)
+static void WindowGLswap(WindowGL windowGL)
 {
     SDL_GL_SwapWindow(windowGL.window);
 }

@@ -26,7 +26,7 @@ void voxelWorldUpdate(struct VoxelWorld* world,
         for (uint32_t y = 0; y < world->world.chunks.countY; ++y) {
             for (uint32_t x = 0; x < world->world.chunks.countX; ++x) {
 
-                voxelInstance->update(&(world->mesh[index]), &(world->world.chunks.data[z][y][x]), x, y, z, 8, 8, 8, getVoxelColor);
+                voxelInstance->update(&(world->mesh[index]), &(world->world.chunks.data[z][y][x]), 8, 8, 8, getVoxelColor);
                 ++index;
             }
         }

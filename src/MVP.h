@@ -11,10 +11,14 @@ struct MVP
     struct Matrix model;
 };
 
-void mvpInit(struct MVP* mvp);
-void mvpSetView(struct MVP* mvp, struct CameraGL* camera, struct Vector3fManager* manager);
-void mvpSetProjection(struct MVP* mvp, float angle_radians, float ratio, float near, float far);
-void mvpDelete(struct MVP* mvp);
+struct MVPManager
+{
+    void (*init)(struct MVP* mvp, struct MatrixManager* matrix);
+    void (*setView)(struct MVP* mvp, struct CameraGL* camera, struct Vector3fManager* vector, struct MatrixManager* matrix);
+    void (*setProjection)(struct MVP* mvp, float angle_radians, float ratio, float near, float far, struct MatrixManager* matrix);
+    void (*delete)(struct MVP* mvp, struct MatrixManager* matrix);
+};
 
+struct MVPManager mvpManagerInit();
 
 #endif // MODELVIEWPROJECTION_HEADER_FILE

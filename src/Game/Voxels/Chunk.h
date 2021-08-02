@@ -14,8 +14,17 @@ struct Chunk
 
 struct ChunkManager
 {
-    void (*init)(struct Chunk* chunk, uint32_t width, uint32_t height, uint32_t depth);
-    void (*fill)(struct Chunk* chunk, uint32_t width, uint32_t height, uint32_t depth, struct Voxel voxel);
+    void (*init)(struct Chunk* chunk, uint32_t widthChunk, uint32_t heightChunk, uint32_t depthChunk);
+    void (*fill)(struct Chunk* chunk, uint32_t widthChunk, uint32_t heightChunk, uint32_t depthChunk, struct Voxel voxel);
+    void (*randFill)(struct Chunk* chunk, uint32_t widthChunk, uint32_t heightChunk, uint32_t depthChunk, uint32_t size);
+    void (*setVoxel)(struct Chunk* chunk,
+                     uint32_t x,
+                     uint32_t y,
+                     uint32_t z,
+                     uint32_t widthChunk,
+                     uint32_t heightChunk,
+                     uint32_t depthChunk,
+                     struct Voxel vox);
     void (*delete)(struct Chunk* chunk);
 };
 

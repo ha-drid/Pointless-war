@@ -25,16 +25,21 @@ struct Matrix
     uint32_t height;
 };
 
-void matrixInit(struct Matrix* mat, uint32_t width, uint32_t height);
-void matrixSetFloat(struct Matrix* mat, float value);
-void matrixTranslate3f(struct Matrix* mat, float x, float y, float z);
-float* matrixGetFloat(struct Matrix* mat, uint32_t x, uint32_t y);
-void matrixLookAt(struct Matrix* mat,
-                  float eyex, float eyey, float eyez,
-                  float centerx, float centery, float centerz,
-                  float upx, float upy, float upz,
-                  struct Vector3fManager* manager);
-void matrixPerpective(struct Matrix* mat, float angle_radians, float ratio, float near, float far);
-void matrixDelete(struct Matrix* mat);
+struct MatrixManager
+{
+    void (*init)(struct Matrix* mat, uint32_t width, uint32_t height);
+    void (*setFloat)(struct Matrix* mat, float value);
+    void (*translate3f)(struct Matrix* mat, float x, float y, float z);
+    float* (*getFloat)(struct Matrix* mat, uint32_t x, uint32_t y);
+    void (*lookAt)(struct Matrix* mat,
+                    float eyex, float eyey, float eyez,
+                    float centerx, float centery, float centerz,
+                    float upx, float upy, float upz,
+                    struct Vector3fManager* manager);
+    void (*perpective)(struct Matrix* mat, float angle_radians, float ratio, float near, float far);
+    void (*delete)(struct Matrix* mat);
+};
+
+struct MatrixManager matrixManagerInit();
 
 #endif // MATH_3D___HEADER_FILE

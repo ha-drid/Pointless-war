@@ -11,9 +11,6 @@ void voxelInstanceInit(struct VoxelInstance* mesh, uint32_t max_voxel_size)
 
 void voxelInstanceUpdate(struct VoxelInstance* mesh,
                          struct Chunk* chunk,
-                         uint32_t x,
-                         uint32_t y,
-                         uint32_t z,
                          uint32_t chunk_width,
                          uint32_t chunk_height,
                          uint32_t chunk_depth,

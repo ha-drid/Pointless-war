@@ -1,13 +1,13 @@
 #include "matrix.h"
 
-void matrixInit(struct Matrix* mat, uint32_t width, uint32_t height)
+static void matrixInit(struct Matrix* mat, uint32_t width, uint32_t height)
 {
     mat->data = (float*)malloc(sizeof(float) * (width * height));
     mat->height = height;
     mat->width = width;
 }
 
-void matrixSetFloat(struct Matrix* mat, float value)
+static void matrixSetFloat(struct Matrix* mat, float value)
 {
     for (uint32_t y = 0; y < mat->height; ++y)
     {
@@ -25,7 +25,7 @@ void matrixSetFloat(struct Matrix* mat, float value)
     }
 }
 
-void matrixTranslate3f(struct Matrix* mat, float x, float y, float z)
+static void matrixTranslate3f(struct Matrix* mat, float x, float y, float z)
 {
     if (mat->width != 4 || mat->height != 4)
         assert(false);
@@ -36,12 +36,12 @@ void matrixTranslate3f(struct Matrix* mat, float x, float y, float z)
     mat->data[2 + (3 * mat->width)] = z;
 }
 
-float* matrixGetFloat(struct Matrix* mat, uint32_t x, uint32_t y)
+static float* matrixGetFloat(struct Matrix* mat, uint32_t x, uint32_t y)
 {
     return &(mat->data[x + (mat->width * y)]);
 }
 
-void matrixLookAt(struct Matrix* mat,
+static void matrixLookAt(struct Matrix* mat,
                   float eyex, float eyey, float eyez,
                   float centerx, float centery, float centerz,
                   float upx, float upy, float upz,
@@ -75,7 +75,7 @@ void matrixLookAt(struct Matrix* mat,
 
 }
 
-void matrixPerpective(struct Matrix* mat, float angle_radians, float ratio, float near, float far)
+static void matrixPerpective(struct Matrix* mat, float angle_radians, float ratio, float near, float far)
 {
     if (mat->width != 4 || mat->height != 4)
         assert(false);
@@ -90,9 +90,24 @@ void matrixPerpective(struct Matrix* mat, float angle_radians, float ratio, floa
 	(*matrixGetFloat(mat, 2, 3)) = - (2 * far * near) / (far - near);
 }
 
-void matrixDelete(struct Matrix* mat)
+static void matrixDelete(struct Matrix* mat)
 {
     free((mat->data));
     mat->height = 0;
     mat->width = 0;
 }
+
+struct MatrixManager matrixManagerInit()
+{
+    struct MatrixManager manager;
+
+    manager.delete = &matrixDelete;
+    manager.getFloat = &matrixGetFloat;
+    manager.init = &matrixInit;
+    manager.lookAt = &matrixLookAt;
+    manager.perpective = &matrixPerpective;
+    manager.translate3f = &matrixTranslate3f;
+    manager.setFloat = &matrixSetFloat;
+
+    return manager;
+};

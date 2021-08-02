@@ -1,6 +1,6 @@
 #include "Render.h"
 
-void renderInit(struct Render* render)
+static void renderInit(struct Render* render)
 {
     render->attributs.size = 0;
     render->attributs.capacity = 2;
@@ -8,7 +8,7 @@ void renderInit(struct Render* render)
     render->attributs.data =  (uint32_t*)malloc(sizeof(int) * render->attributs.capacity);
 }
 
-void addAttribute(struct Render* render,
+static void addAttribute(struct Render* render,
                     Program* program,
                          struct ProgramManager* prog_manager,
                          const char* attrib_name,
@@ -34,7 +34,7 @@ void addAttribute(struct Render* render,
     }
 }
 
-void draw(struct Render* render, GLenum mode, GLsizei count, GLenum type, const void *indices)
+static void draw(struct Render* render, GLenum mode, GLsizei count, GLenum type, const void *indices)
 {
     for (uint32_t i = 0; i < render->attributs.size; ++i)
         glEnableVertexAttribArray(render->attributs.data[i]);
@@ -45,7 +45,7 @@ void draw(struct Render* render, GLenum mode, GLsizei count, GLenum type, const 
         glDisableVertexAttribArray(render->attributs.data[i]);
 }
 
-void drawInstanced(struct Render* render, GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei instancecount)
+static void drawInstanced(struct Render* render, GLenum mode, GLsizei count, GLenum type, const void *indices, GLsizei instancecount)
 {
     for (uint32_t i = 0; i < render->attributs.size; ++i)
         glEnableVertexAttribArray(render->attributs.data[i]);
@@ -56,7 +56,7 @@ void drawInstanced(struct Render* render, GLenum mode, GLsizei count, GLenum typ
         glDisableVertexAttribArray(render->attributs.data[i]);
 }
 
-void deleteRender(struct Render* render)
+static void deleteRender(struct Render* render)
 {
     free(render->attributs.data);
     render->attributs.capacity = 0;

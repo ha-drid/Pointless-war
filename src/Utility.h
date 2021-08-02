@@ -13,6 +13,7 @@
 #include "GL/CameraGL.h"
 #include "Game/Voxels/Chunk.h"
 #include "Game/VoxelWorld.h"
+#include "MVP.h"
 
 struct GlobalManager
 {
@@ -22,10 +23,11 @@ struct GlobalManager
     struct CameraGLManager cameraGL;
     struct Vector3fManager vector3f;
     struct VoxelWorldManager voxelWorld;
-//    struct WorldManager world;
+    struct MVPManager mvp;
     struct ChunkManager chunk;
     struct ChunksManager chunks;
     struct VoxelInstanceManager voxelInstance;
+    struct MatrixManager matrix;
 };
 
 struct GlobalManager globalManagerInit();
