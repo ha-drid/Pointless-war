@@ -8,7 +8,7 @@
 #define gradus_s(x) \
     ((float)((180.0f / M_PI) * x))
 
-void cameraGlInit(struct CameraGL* camera, float x, float y, float z, float xAngle, float yAngle, float speed)
+static void cameraGlInit(struct CameraGL* camera, float x, float y, float z, float xAngle, float yAngle, float speed)
 {
     camera->x = x;
     camera->y = y;
@@ -18,7 +18,7 @@ void cameraGlInit(struct CameraGL* camera, float x, float y, float z, float xAng
     camera->speed = speed;
 }
 
-void cameraRotate(struct CameraGL* camera, float xAngleGradus, float yAngleGradus)
+static void cameraRotate(struct CameraGL* camera, float xAngleGradus, float yAngleGradus)
 {
     camera->xAngle += radians_s(xAngleGradus);
     camera->yAngle += radians_s(yAngleGradus);
@@ -35,7 +35,7 @@ void cameraRotate(struct CameraGL* camera, float xAngleGradus, float yAngleGradu
         camera->yAngle = radians_s(-89.0f);
 }
 
-void cameraApply(struct Program* program, struct ProgramManager* manager, struct CameraGL* camera,
+static void cameraApply(struct Program* program, struct ProgramManager* manager, struct CameraGL* camera,
                   const char* cameraPositionUniform, const char* cameraDirectionUniform)
 {
     manager->setVec3f(program, cameraPositionUniform, camera->x, camera->y, camera->z);
@@ -47,7 +47,7 @@ void cameraApply(struct Program* program, struct ProgramManager* manager, struct
                             );
 }
 
-void cameraMove(struct CameraGL* camera, uint32_t move)
+static void cameraMove(struct CameraGL* camera, uint32_t move)
 {
     if (move == CAMERA_FORWARD)
     {
@@ -73,7 +73,7 @@ void cameraMove(struct CameraGL* camera, uint32_t move)
     }
 }
 
-void cameraSetPosition(struct CameraGL* camera, float x, float y, float z)
+static void cameraSetPosition(struct CameraGL* camera, float x, float y, float z)
 {
     camera->x = x;
     camera->y = y;

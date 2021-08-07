@@ -1,54 +1,65 @@
 #include "Surmap.h"
 #include <stb_image.h>
 
-void surmapInit(struct Surmap* surmap, const char* path)
+static void surmapInit(struct Surmap* surmap,
+                const char* path,
+                void (*setBlockInWorld)(unsigned char* image_data,
+                     int channels,
+                     struct Chunk* worldData,
+                     uint32_t width_world,
+                     uint32_t height_world,
+                     uint32_t depth_world,
+                     struct ChunkManager* manage),
+                struct ChunkManager* manager)
 {
-    surmap->heightMap.data = stbi_load(path,
-                                       &(surmap->heightMap.width),
-                                       &(surmap->heightMap.height),
-                                       &(surmap->heightMap.format),
-                                       0);
+    int width, height, channels;
+    unsigned char* data = stbi_load(path, &width, &height, &channels, 0);
 
-    surmap->materials.data = NULL;
+    manager->init(&(surmap->world.data), width, 256, height);
+    surmap->world.depth = height;
+    surmap->world.height = 256;
+    surmap->world.width = width;
+    manager->fill(&(surmap->world.data), width, 256, height, (struct Voxel){ 0 });
+
+    setBlockInWorld(data, channels,
+                    &(surmap->world.data),
+                    surmap->world.width,
+                    surmap->world.height,
+                    surmap->world.depth,
+                    manager);
+
+    stbi_image_free(data);
     surmap->materials.capacity = 0;
+    surmap->materials.data = NULL;
 }
 
-void surmapAddMaterial(struct Surmap* surmap,
-                       const const struct Chunk* chunk,
-                       uint32_t width_chunk,
-                       uint32_t height_chunk,
-                       uint32_t depth_chunk,
-                       float (*voxelGetColor)(struct Voxel voxel, uint32_t index),
-                       struct VoxelInstanceManager* voxelInstance)
+static void surmapDraw(struct Surmap* surmap, float x_pos, float y_pos, float z_pos, void (*renderVoxels)(struct VoxelInstance* mesh, float x, float y, float z))
 {
-    uint32_t i = surmap->materials.capacity;
-    ++surmap->materials.capacity;
+    for (int z = z_pos - surmap->renderDistance.depth; z < z_pos + surmap->renderDistance.depth; ++z) {
+        for (int y = y_pos - surmap->renderDistance.height; y < y_pos + surmap->renderDistance.height; ++y) {
+            for (int x = x_pos - surmap->renderDistance.width; x < x_pos + surmap->renderDistance.width; ++x) {
+                if ((x < 0) || (x >= surmap->world.width) ||
+                    (y < 0) || (y >= surmap->world.height) ||
+                    (z < 0) || (z >= surmap->world.depth))
+                    continue;
 
-    surmap->materials.data = realloc(surmap->materials.data, surmap->materials.capacity);
+                uint32_t iZ = z * (surmap->world.width * surmap->world.height);
+                uint32_t iY = y * surmap->world.width;
+                unsigned iD = surmap->world.data.voxels[iZ + iY + x].iD;
 
-    voxelInstance->init(&(surmap->materials.data[i]), width_chunk * height_chunk * depth_chunk);
-    voxelInstance->update(&(surmap->materials.data[i]), chunk, width_chunk, height_chunk, depth_chunk, voxelGetColor);
-}
-
-void surmapDraw(struct Surmap* surmap, float x_pos, float z_pos, void (*renderVoxels)(struct VoxelInstance* mesh, float x, float y, float z))
-{
-    for (int z = z_pos - surmap->renderDistance.depth; z < z_pos + surmap->renderDistance.depth; ++z)
-    {
-        for (int x = x_pos - surmap->renderDistance.width; x < x_pos + surmap->renderDistance.width; ++x)
-        {
-            if ((x < 0) || (x >= surmap->heightMap.width) ||
-                (z < 0) || (z >= surmap->heightMap.height))
-                continue;
-
-            renderVoxels(&(surmap->materials.data[0]),  x*8,(surmap->heightMap.data[x + (z*surmap->heightMap.width)]/15)*8,z*8);
-            renderVoxels(&(surmap->materials.data[1]),  x*8,((surmap->heightMap.data[x + (z*surmap->heightMap.width)]/15) - 1)*8,z*8);
-
+                if (iD == 0)
+                    continue;
+                else if (iD >= surmap->materials.capacity)
+                    renderVoxels(&(surmap->materials.data[0]), x * 8, y * 8, z * 8);
+                else
+                    renderVoxels(&(surmap->materials.data[iD]), x * 8, y * 8, z * 8);
+            }
         }
     }
 
 }
 
-void surmapAddLoadMaterial(struct Surmap* surmap,
+static void surmapAddLoadMaterial(struct Surmap* surmap,
                            const char* path,
                            uint32_t modelWidth,
                            uint32_t modelHeight,
@@ -83,9 +94,6 @@ void surmapAddLoadMaterial(struct Surmap* surmap,
                 surmap->materials.data[i].positionInstances[(index * 3) + 1] = y;
                 surmap->materials.data[i].positionInstances[(index * 3) + 2] = z;
 
-                uint32_t iZ = z * (modelHeight * modelWidth);
-                uint32_t iY = y * modelWidth;
-
                 surmap->materials.data[i].colorInstances[(index * 3) + 0] = one * imageData[(index * 3) + 0];
                 surmap->materials.data[i].colorInstances[(index * 3) + 1] = one * imageData[(index * 3) + 1];
                 surmap->materials.data[i].colorInstances[(index * 3) + 2] = one * imageData[(index * 3) + 2];
@@ -98,21 +106,33 @@ void surmapAddLoadMaterial(struct Surmap* surmap,
     stbi_image_free(imageData);
 };
 
-void surmapSetRenderDistance(struct Surmap* surmap, uint32_t width, uint32_t depth)
+static void surmapSetRenderDistance(struct Surmap* surmap, uint32_t width, uint32_t height, uint32_t depth)
 {
     surmap->renderDistance.depth = depth;
+    surmap->renderDistance.height = height;
     surmap->renderDistance.width = width;
 }
 
-void surmapDelete(struct Surmap* surmap, struct VoxelInstanceManager* voxelInstance)
+static void surmapDelete(struct Surmap* surmap, struct VoxelInstanceManager* voxelInstance, struct ChunkManager* chunk)
 {
     for (uint32_t i = 0; i < surmap->materials.capacity; ++i)
     {
         voxelInstance->delete(&(surmap->materials.data[i]));
     }
+    chunk->delete(&(surmap->world.data));
 
     free(surmap->materials.data);
     surmap->materials.capacity = 0;
-
-    stbi_image_free(surmap->heightMap.data);
 }
+
+struct SurmapManager surmapManagerInit()
+{
+    struct SurmapManager manager;
+    manager.addLoadMaterial = &surmapAddLoadMaterial;
+    manager.delete = &surmapDelete;
+    manager.draw = &surmapDraw;
+    manager.init = &surmapInit;;
+    manager.setRenderDistance = &surmapSetRenderDistance;
+
+    return manager;
+};

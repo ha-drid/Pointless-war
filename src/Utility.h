@@ -6,6 +6,7 @@
 #include "main.h"
 #include "World.h"
 
+#include "Game/Objects/Object.h"
 #include "SDL/Window.h"
 #include "GL/Render.h"
 #include "GL/Program.h"
@@ -13,7 +14,9 @@
 #include "GL/CameraGL.h"
 #include "Game/Voxels/Chunk.h"
 #include "Game/VoxelWorld.h"
+#include "Game/Surmap.h"
 #include "MVP.h"
+#include "Time.h"
 
 struct GlobalManager
 {
@@ -28,6 +31,9 @@ struct GlobalManager
     struct ChunksManager chunks;
     struct VoxelInstanceManager voxelInstance;
     struct MatrixManager matrix;
+    struct SurmapManager surmap;
+    struct ObjectManager object;
+    struct TimeManager time;
 };
 
 struct GlobalManager globalManagerInit();

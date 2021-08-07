@@ -1,6 +1,6 @@
 #include "Chunks.h"
 
-void chunksInit(struct Chunks* chunks,
+static void chunksInit(struct Chunks* chunks,
                 uint32_t chunk_countX,
                 uint32_t chunk_countY,
                 uint32_t chunk_countZ,
@@ -48,7 +48,7 @@ void chunksInit(struct Chunks* chunks,
     }
 }
 
-bool chunksIsThereAChunk(struct Chunks* chunks, int x, int y, int z)
+static bool chunksIsThereAChunk(struct Chunks* chunks, int x, int y, int z)
 {
     if ((x < 0) || (x >= chunks->chunks.countX) ||
         (y < 0) || (y >= chunks->chunks.countY) ||
@@ -58,7 +58,7 @@ bool chunksIsThereAChunk(struct Chunks* chunks, int x, int y, int z)
     return true;
 }
 
-void chunksDelete(struct Chunks* chunks, struct ChunkManager* manager)
+static void chunksDelete(struct Chunks* chunks, struct ChunkManager* manager)
 {
     for (uint32_t z = 0; z < chunks->chunks.countZ; ++z) {
         for (uint32_t y = 0; y < chunks->chunks.countY; ++y) {

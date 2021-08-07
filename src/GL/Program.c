@@ -21,7 +21,7 @@ static inline  char* getFileText(const char* path)
    return text;
 }
 
-unsigned loadShader(const char* path, unsigned shader_type)
+static unsigned loadShader(const char* path, unsigned shader_type)
 {
     char* text = getFileText(path);
     GLuint shader = glCreateShader(shader_type);
@@ -44,7 +44,7 @@ unsigned loadShader(const char* path, unsigned shader_type)
     return shader;
 }
 
-void programInit(Program* program, const char* vertexShader, const char* fragmentShader)
+static void programInit(Program* program, const char* vertexShader, const char* fragmentShader)
 {
     program->vertexShader = loadShader(vertexShader, GL_VERTEX_SHADER);
     program->fragmentShader = loadShader(fragmentShader, GL_FRAGMENT_SHADER);
@@ -52,7 +52,7 @@ void programInit(Program* program, const char* vertexShader, const char* fragmen
     program->program = glCreateProgram();
 }
 
-void programLink(Program* program)
+static void programLink(Program* program)
 {
     glAttachShader(program->program, program->vertexShader);
     glAttachShader(program->program, program->fragmentShader);
@@ -71,7 +71,7 @@ void programLink(Program* program)
     }
 }
 
-void programDelete(Program* program)
+static void programDelete(Program* program)
 {
     glDetachShader(program->program, program->vertexShader);
     glDetachShader(program->program, program->fragmentShader);
@@ -82,41 +82,42 @@ void programDelete(Program* program)
     glDeleteProgram(program->program);
 }
 
-GLint programGetAttribLocation(Program* program, const char* name)
+static GLint programGetAttribLocation(Program* program, const char* name)
 {
     return glGetAttribLocation(program->program, name);
 }
 
-GLint programGetUniformLocation(Program* program, const char* name)
+static GLint programGetUniformLocation(Program* program, const char* name)
 {
     return glGetUniformLocation(program->program, name);
 }
 
-void programSetFloat(Program* program, const char* name, float x)
+static void programSetFloat(Program* program, const char* name, float x)
 {
     glUniform1f(programGetUniformLocation(program, name), x);
 }
 
-void programSetVec3f(Program* program, const char* name, float x, float y, float z)
+static void programSetVec3f(Program* program, const char* name, float x, float y, float z)
 {
     glUniform3f(programGetUniformLocation(program, name), x, y, z);
 }
 
-void programSetInt(Program* program, const char* name, int x)
+static void programSetInt(Program* program, const char* name, int x)
 {
     glUniform1i(programGetUniformLocation(program, name), x);
 }
 
-void programSetMat4fv(struct Program* program, const char* name, GLsizei count, GLboolean transpose, const GLfloat *value)
+static void programSetMat4fv(struct Program* program, const char* name, GLsizei count, GLboolean transpose, const GLfloat *value)
 {
     glUniformMatrix4fv(programGetUniformLocation(program, name), count, transpose, value);
 }
-void programSetVec3fArray(struct Program* program, const char* name, GLsizei count, const GLfloat* value)
+
+static void programSetVec3fArray(struct Program* program, const char* name, GLsizei count, const GLfloat* value)
 {
     glUniform3fv(programGetUniformLocation(program, name), count, value);
 }
 
-void programUse(Program* program)
+static void programUse(Program* program)
 {
     glUseProgram(program->program);
 }

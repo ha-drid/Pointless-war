@@ -1,6 +1,6 @@
 #include "VoxelInstance.h"
 
-void voxelInstanceInit(struct VoxelInstance* mesh, uint32_t max_voxel_size)
+static void voxelInstanceInit(struct VoxelInstance* mesh, uint32_t max_voxel_size)
 {
     mesh->voxel_size = 0;
 
@@ -9,7 +9,7 @@ void voxelInstanceInit(struct VoxelInstance* mesh, uint32_t max_voxel_size)
     mesh->positionInstances = (float*)malloc(sizeof(float) * capacity);
 }
 
-void voxelInstanceUpdate(struct VoxelInstance* mesh,
+static void voxelInstanceUpdate(struct VoxelInstance* mesh,
                          struct Chunk* chunk,
                          uint32_t chunk_width,
                          uint32_t chunk_height,
@@ -41,7 +41,7 @@ void voxelInstanceUpdate(struct VoxelInstance* mesh,
     mesh->voxel_size = index;
 }
 
-void voxelInstanceDelete(struct VoxelInstance* mesh)
+static void voxelInstanceDelete(struct VoxelInstance* mesh)
 {
     mesh->voxel_size = 0;
     free(mesh->positionInstances);

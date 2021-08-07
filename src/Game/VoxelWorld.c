@@ -1,6 +1,6 @@
 #include "VoxelWorld.h"
 
-void voxelWorldInit(struct VoxelWorld* world,
+static void voxelWorldInit(struct VoxelWorld* world,
                     uint32_t width,
                     uint32_t height,
                     uint32_t depth,
@@ -15,7 +15,7 @@ void voxelWorldInit(struct VoxelWorld* world,
         voxelInstance->init(&(world->mesh[i]), 8 * 8 * 8);
 };
 
-void voxelWorldUpdate(struct VoxelWorld* world,
+static void voxelWorldUpdate(struct VoxelWorld* world,
                       float (*getVoxelColor)(struct Voxel vox, uint32_t index),
                       struct ChunkManager* chunk,
                       struct ChunksManager* chunks,
@@ -32,7 +32,8 @@ void voxelWorldUpdate(struct VoxelWorld* world,
         }
     }
 }
-void voxelWorldDelete(struct VoxelWorld* world,
+
+static void voxelWorldDelete(struct VoxelWorld* world,
                     struct ChunkManager* chunk,
                     struct ChunksManager* chunks,
                     struct VoxelInstanceManager* voxelInstance)

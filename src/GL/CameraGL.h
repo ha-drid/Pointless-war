@@ -29,12 +29,4 @@ struct CameraGLManager
 
 struct CameraGLManager cameraGlManagerInit();
 
-void cameraGlInit(struct CameraGL* camera, float x, float y, float z, float xAngle, float yAngle, float speed);
-void cameraRotate(struct CameraGL* camera, float xAngleGradus, float yAngleGradus);
-void cameraMove(struct CameraGL* camera, uint32_t move);
-void cameraApply(struct Program* program, struct ProgramManager* manager, struct CameraGL* camera,
-                  const char* cameraPositionUniform, const char* cameraDirectionUniform);
-
-void cameraSetPosition(struct CameraGL* camera, float x, float y, float z);
-
 #endif // GLCAMERA_HEADER_INCLUDE_FILE

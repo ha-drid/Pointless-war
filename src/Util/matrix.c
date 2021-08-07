@@ -90,6 +90,18 @@ static void matrixPerpective(struct Matrix* mat, float angle_radians, float rati
 	(*matrixGetFloat(mat, 2, 3)) = - (2 * far * near) / (far - near);
 }
 
+static struct Matrix* matrixMultiplication4x4(struct Matrix* mat1, struct Matrix* mat2)
+{
+    struct Matrix mat;
+    matrixInit(&mat, 4, 4);
+    for (uint32_t i = 0; i < 16; ++i)
+    {
+        mat.data[i] = mat1->data[i] * mat2->data[i];
+    }
+
+    return (&mat);
+}
+
 static void matrixDelete(struct Matrix* mat)
 {
     free((mat->data));

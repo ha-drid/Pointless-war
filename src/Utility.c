@@ -1,19 +1,26 @@
 #include "Utility.h"
 
+/**< Порядок обьявлений этих структур управленцев важен.
+    Так как чем ниже структура обьявлена чем позже она добавлена.
+    Так можно понимать как развивался проект.
+    */
 struct GlobalManager globalManagerInit()
 {
     struct GlobalManager manager;
-    manager.cameraGL = cameraGlManagerInit();
     manager.windowGL = windowGLManagerInit();
     manager.render = renderManagerInit();
-    manager.vector3f = vector3fManagerInit();
     manager.program = programManagerInit();
+    manager.cameraGL = cameraGlManagerInit();
+    manager.vector3f = vector3fManagerInit();
+    manager.chunk = chunkManagerInit();
+    manager.voxelInstance = voxelInstanceManagerInit();
+    manager.chunks = chunksManagerInit();
+    manager.matrix = matrixManagerInit();
     manager.voxelWorld = voxelWorldManagerInit();
     manager.mvp = mvpManagerInit();
-    manager.chunk = chunkManagerInit();
-    manager.chunks = chunksManagerInit();
-    manager.voxelInstance = voxelInstanceManagerInit();
-    manager.matrix = matrixManagerInit();
+    manager.surmap = surmapManagerInit();
+    manager.object = objectManagerInit();
+    manager.time = timeManagerInit();
 
     return manager;
 }

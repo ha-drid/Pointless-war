@@ -64,7 +64,6 @@ enum VoxelType
     Grass,
     Stone,
     Dirt,
-    Red,
 };
 
 static const float VoxelColor[5][3] = {
@@ -74,7 +73,5 @@ static const float VoxelColor[5][3] = {
     {  0.85f, 0.32f,  0.12f},
     {  1.0f,  0.0f,   0.0f }
 };
-
-
 
 #endif // MAIN_HEADER_FILE

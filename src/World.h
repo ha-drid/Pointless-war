@@ -9,7 +9,6 @@
 #include "GL/CameraGL.h"
 
 #include "Game/VoxelWorld.h"
-#include "Game/Entity.h"
 
 struct World
 {

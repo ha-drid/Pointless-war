@@ -17,6 +17,7 @@ typedef struct WindowGLManager
 {
     void (*init)(WindowGL* win, const char* name, int width, int height, unsigned sdl_flags);
     void (*swap)(WindowGL win);
+    bool (*isFocused)(WindowGL* win);
     void (*delete)(WindowGL* win);
 } WindowGLManager;
 

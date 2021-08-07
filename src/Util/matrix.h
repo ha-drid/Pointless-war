@@ -29,6 +29,7 @@ struct MatrixManager
 {
     void (*init)(struct Matrix* mat, uint32_t width, uint32_t height);
     void (*setFloat)(struct Matrix* mat, float value);
+    struct Matrix* (*multiplication4x4)(struct Matrix* mat1, struct Matrix* mat2);
     void (*translate3f)(struct Matrix* mat, float x, float y, float z);
     float* (*getFloat)(struct Matrix* mat, uint32_t x, uint32_t y);
     void (*lookAt)(struct Matrix* mat,
