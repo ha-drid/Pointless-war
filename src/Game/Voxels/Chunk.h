@@ -25,6 +25,7 @@ struct ChunkManager
                      uint32_t heightChunk,
                      uint32_t depthChunk,
                      struct Voxel vox);
+    Voxel (*getVoxel)(struct Chunk* chunk, int x, int y, int z, int width, int height, int depth);
     void (*delete)(struct Chunk* chunk);
 };
 

@@ -7,6 +7,7 @@
 #include <time.h>
 #include <assert.h>
 #include <stdint-gcc.h>
+#include <cbitset/bitset.h>
 #include "Voxels/Chunk.h"
 #include "Voxels/VoxelInstance.h"
 
@@ -19,13 +20,18 @@ struct Surmap
          Ќапример нужно отрсисовать сто кирпичей. —оздаем один кирпич, все сотни отрисовываем этим кирпичем*/
     struct
     {
-        struct VoxelInstance* data;
+        struct VoxelInstance* data; // —ами данные о материале. ќговорка мы будем рисовать материалы воксел€ми.
+                                    // “о есть например: материал земли будеть 8 в ширину, 8 в высоту, 8 в глубину вокселей,
+                                    // в итоге в этом материале будеть 640 вокселей
+        uint32_t blockW, blockH, blockD; // размер всех материалов
         uint32_t capacity; // количество материалов
     } materials;
 
     struct
     {
-        struct Chunk data;
+        struct Chunk data; // ќдин большой чанк который будеть хранить все воксели этого мира.
+        struct bitset_s* isViewVoxel; // Ёто структура чтобы понимать какие воксели могут юыть видны а какие нет.
+                                    // ¬едь зачем рисовать то что все равно не будеть видно
         uint32_t height, depth, width;
     } world;
 
@@ -35,21 +41,14 @@ struct Surmap
 struct SurmapManager
 {
     void (*init)(struct Surmap* surmap,
-                    const char* path,
-                    void (*setBlockInWorld)(unsigned char* image_data,
-                        int channels,
-                        struct Chunk* worldData,
-                        uint32_t width_world,
-                        uint32_t height_world,
-                        uint32_t depth_world,
-                        struct ChunkManager* manage),
-                    struct ChunkManager* manager);
-    void (*addLoadMaterial)(struct Surmap* surmap,
-                            const char* path,
-                            uint32_t modelWidth,
-                            uint32_t modelHeight,
-                            uint32_t modelDepth,
-                            struct VoxelInstanceManager* voxelInstance);
+                const char* path,
+                uint32_t blockWidth, uint32_t blockHeight, uint32_t blockDepth,
+                void (*setBlockInWorld)(unsigned char* image_data, int channels,
+                                        struct Chunk* world, uint32_t widthWorld, uint32_t heightWorld, uint32_t depthWorld,
+                                        struct ChunkManager* manage),
+                struct ChunkManager* chunkManager);
+
+    void (*addLoadMaterial)(struct Surmap* surmap, const char* path, struct VoxelInstanceManager* voxelInstance);
     void (*setRenderDistance)(struct Surmap* surmap, uint32_t width, uint32_t height, uint32_t depth);
     void (*draw)(struct Surmap* surmap,
                     float x_pos, float y_pos, float z_pos,

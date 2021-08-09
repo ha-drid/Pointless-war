@@ -4,7 +4,6 @@
 #include <glad/glad.h>
 
 #include "main.h"
-#include "World.h"
 
 #include "Game/Objects/Object.h"
 #include "SDL/Window.h"

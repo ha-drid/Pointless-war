@@ -22,11 +22,7 @@ mat4 rotate(mat4 matrix, float angle, vec3 vector);
 
 // 
 void main()
-{	
-	/*mat4 view = lookAt(camera_position,
-	       		   camera_direction,
-			       vec3(0, 1, 0));
-		*/		   
+{		   
 	mat4 mvp = u_projection * u_view * u_model;
 	
 	gl_Position = mvp * vec4(position + positionInstances[gl_InstanceID], 1);

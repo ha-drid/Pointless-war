@@ -1,36 +1,48 @@
 #include "Surmap.h"
 #include <stb_image.h>
 
-static void surmapInit(struct Surmap* surmap,
-                const char* path,
-                void (*setBlockInWorld)(unsigned char* image_data,
-                     int channels,
-                     struct Chunk* worldData,
-                     uint32_t width_world,
-                     uint32_t height_world,
-                     uint32_t depth_world,
-                     struct ChunkManager* manage),
-                struct ChunkManager* manager)
+static void surmapMapInit(struct Surmap* surmap,
+                          const char* heightImageFile,
+                          void (*setBlockInWorld)(unsigned char* image_data, int channels,
+                                            struct Chunk* world, uint32_t widthWorld, uint32_t heightWorld, uint32_t depthWorld,
+                                            struct ChunkManager* manage),
+                          struct ChunkManager* chunkManager)
 {
     int width, height, channels;
-    unsigned char* data = stbi_load(path, &width, &height, &channels, 0);
+    unsigned char* imageData = stbi_load(heightImageFile, &width, &height, &channels, 0);
 
-    manager->init(&(surmap->world.data), width, 256, height);
-    surmap->world.depth = height;
+    chunkManager->init(&(surmap->world.data), width, 256, height);
+
+    surmap->world.depth = height; // высота файла будеть глубиной карты мира
     surmap->world.height = 256;
     surmap->world.width = width;
-    manager->fill(&(surmap->world.data), width, 256, height, (struct Voxel){ 0 });
+    chunkManager->fill(&(surmap->world.data), surmap->world.width, surmap->world.height, surmap->world.depth, (Voxel) {0});
 
-    setBlockInWorld(data, channels,
-                    &(surmap->world.data),
-                    surmap->world.width,
-                    surmap->world.height,
-                    surmap->world.depth,
-                    manager);
+    // это нужно для модульности чтобы разные карт выглядели разно
+    setBlockInWorld(imageData, channels, &(surmap->world.data), surmap->world.width, surmap->world.height, surmap->world.depth, chunkManager);
 
-    stbi_image_free(data);
+    // Инициализация bitset структуры на Си
+    surmap->world.isViewVoxel = bitset_create();
+    bitset_resize(surmap->world.isViewVoxel, surmap->world.width * surmap->world.height * surmap->world.depth, false);
+
+    stbi_image_free(imageData);
+}
+
+static void surmapInit(struct Surmap* surmap,
+                    const char* path,
+                    uint32_t blockWidth, uint32_t blockHeight, uint32_t blockDepth,
+                    void (*setBlockInWorld)(unsigned char* image_data, int channels,
+                                            struct Chunk* world, uint32_t widthWorld, uint32_t heightWorld, uint32_t depthWorld,
+                                            struct ChunkManager* manage),
+                    struct ChunkManager* chunkManager)
+{
+    surmap->materials.blockD = blockDepth;
+    surmap->materials.blockH = blockHeight;
+    surmap->materials.blockW = blockWidth;
     surmap->materials.capacity = 0;
     surmap->materials.data = NULL;
+
+    surmapMapInit(surmap, path, setBlockInWorld, chunkManager);
 }
 
 static void surmapDraw(struct Surmap* surmap, float x_pos, float y_pos, float z_pos, void (*renderVoxels)(struct VoxelInstance* mesh, float x, float y, float z))
@@ -59,18 +71,16 @@ static void surmapDraw(struct Surmap* surmap, float x_pos, float y_pos, float z_
 
 }
 
-static void surmapAddLoadMaterial(struct Surmap* surmap,
-                           const char* path,
-                           uint32_t modelWidth,
-                           uint32_t modelHeight,
-                           uint32_t modelDepth,
-                           struct VoxelInstanceManager* voxelInstance)
+static void surmapAddLoadMaterial(struct Surmap* surmap, const char* path, struct VoxelInstanceManager* voxelInstance)
 {
     uint32_t i = surmap->materials.capacity;
     ++surmap->materials.capacity;
 
     surmap->materials.data = realloc(surmap->materials.data, sizeof(struct VoxelInstance) * surmap->materials.capacity);
-    voxelInstance->init(&(surmap->materials.data[i]), modelDepth * modelHeight * modelWidth);
+    voxelInstance->init(&(surmap->materials.data[i]),
+                        surmap->materials.blockD *
+                        surmap->materials.blockH *
+                        surmap->materials.blockW);
 
     // load image file
     stbi_set_flip_vertically_on_load(true);
@@ -78,18 +88,18 @@ static void surmapAddLoadMaterial(struct Surmap* surmap,
     unsigned char* imageData = stbi_load(path, &imageWidth, &imageHeight, &imageChannels, 0);
     stbi_set_flip_vertically_on_load(false);
 
-    if ((imageWidth * imageHeight) != (modelWidth * modelHeight * modelDepth))
+    if ((imageWidth*imageHeight) != (surmap->materials.blockD * surmap->materials.blockH * surmap->materials.blockW))
     {
-        printf ("The image %s and the size of the model does not fit", path);
-        printf("%u %i", modelWidth * modelHeight * modelDepth, imageWidth * imageHeight);
+        printf ("The image %s and the size of the model does not fit.", path);
+        printf("%u %i", surmap->materials.blockH * surmap->materials.blockD * surmap->materials.blockW, imageWidth * imageHeight);
         assert(0);
     }
 
     uint32_t index = 0;
     float one = 1.0 / 255.0;
-    for (uint32_t z = 0; z < modelDepth; ++z) {
-        for (uint32_t y = 0; y < modelHeight; ++y) {
-            for (uint32_t x = 0; x < modelWidth; ++x) {
+    for (uint32_t z = 0; z < surmap->materials.blockD; ++z) {
+        for (uint32_t y = 0; y < surmap->materials.blockH; ++y) {
+            for (uint32_t x = 0; x < surmap->materials.blockW; ++x) {
                 surmap->materials.data[i].positionInstances[(index * 3) + 0] = x;
                 surmap->materials.data[i].positionInstances[(index * 3) + 1] = y;
                 surmap->materials.data[i].positionInstances[(index * 3) + 2] = z;
@@ -123,6 +133,8 @@ static void surmapDelete(struct Surmap* surmap, struct VoxelInstanceManager* vox
 
     free(surmap->materials.data);
     surmap->materials.capacity = 0;
+
+    bitset_free(surmap->world.isViewVoxel);
 }
 
 struct SurmapManager surmapManagerInit()

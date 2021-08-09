@@ -11,6 +11,19 @@ static void chunkFill(struct Chunk* chunk, uint32_t width, uint32_t height, uint
         chunk->voxels[i] = voxel;
 }
 
+static struct Voxel chunkGetVoxel(struct Chunk* chunk, int x, int y, int z, int width, int height, int depth)
+{
+    if ((x < 0) || (x >= width) ||
+	    (y < 0) || (y >= height) ||
+	    (z < 0) || (z >= depth))
+	    return (struct Voxel){ 0 };
+
+    int iZ = z * (width * height);
+    int iY = y * width;
+
+    return (chunk->voxels[iZ + iY + x]);
+}
+
 static void chunkRandFill(struct Chunk* chunk, uint32_t width, uint32_t height, uint32_t depth, uint32_t size)
 {
     for (uint32_t i = 0; i < (width * height * depth); ++i)
@@ -44,6 +57,7 @@ struct ChunkManager chunkManagerInit()
     manager.init = &chunkInit;
     manager.randFill = &chunkRandFill;
     manager.setVoxel = &chunkSetVoxel;
+    manager.getVoxel = &chunkGetVoxel;
 
     return manager;
 }
