@@ -63,6 +63,7 @@ static void objectInit(struct Object* obj,
     obj->height = height;
     obj->width = width;
     obj->depth = depth;
+    obj->isOnGround = false;
 }
 
 static void objectUpdate(struct Object* obj,
@@ -70,16 +71,32 @@ static void objectUpdate(struct Object* obj,
                          bool (*objectWorldIsColision)(struct Object* obj))
 {
     obj->x += obj->xVelocity * time;
-    if (objectWorldIsColision(obj))
+    if (objectWorldIsColision(obj)) {
         obj->x -= obj->xVelocity * time;
+    }
 
     obj->y += obj->yVelocity * time;
-    if (objectWorldIsColision(obj))
-        obj->y -= obj->yVelocity * time;
+    if (objectWorldIsColision(obj)) {
+        // если скорость отрицателная, то есть падал в низ, значит он приземлился на какойто обьект
+        if (obj->yVelocity < 0)
+        {
+            obj->y -= obj->yVelocity * time;
+            obj->isOnGround = true;
+            obj->yVelocity = 0.0f;
+        }
+        // если скорость положительная, то есть летел в верх, значить обьект ударился башкой об какойто обьект
+        else if (obj->yVelocity > 0)
+        {
+            obj->y -= obj->yVelocity * time;
+            obj->yVelocity = 0.0f;
+            obj->isOnGround = false;
+        }
+    }
 
     obj->z += obj->zVelocity * time;
-    if (objectWorldIsColision(obj))
+    if (objectWorldIsColision(obj)) {
         obj->z -= obj->zVelocity * time;
+    }
 
     obj->zVelocity = obj->xVelocity = 0.0f;
 }
@@ -93,6 +110,21 @@ static void objectDraw(struct Object* obj, void (*voxelDraw)(float x, float y, f
             }
         }
     }
+}
+
+static void objectVertMove(struct Object* obj, float gravity, float time)
+{
+    if (gravity < 0.0f) // если должны мы падать
+    {
+        if (obj->isOnGround == false) // то проверяем воздухе ли мы
+            obj->yVelocity += gravity * time;
+    }
+    else if (gravity > 0.0f) // если должны лететь верх
+    {
+        obj->yVelocity += gravity * time;
+        obj->isOnGround = false;
+    }
+    obj->isOnGround = false;
 }
 
 static bool objectIsColision(struct Object* obj, float x, float y, float z, float width, float height, float depth) {
@@ -110,6 +142,7 @@ struct ObjectManager objectManagerInit()
     manager.setVelocity = &objectSetVelocity;
     manager.update = &objectUpdate;
     manager.move = &objectMove;
+    manager.vertMove = &objectVertMove;
     manager.isColision = &objectIsColision;
     return manager;
 };

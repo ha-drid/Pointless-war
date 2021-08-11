@@ -22,6 +22,7 @@ struct Object
     float width, height, depth;
     float xAngle, yAngle;
     float speed;
+    bool isOnGround;
 };
 
 struct ObjectManager
@@ -39,6 +40,7 @@ struct ObjectManager
                  float xAngle, float yAngle,
                  float speed);
     void (*move)(struct Object* obj, ObjectMove move, bool x, bool y, bool z);
+    void (*vertMove)(struct Object* obj, float gravity, float time);
     void (*draw)(struct Object* obj, void (*voxelDraw)(float x, float y, float z));
 };
 

@@ -1,6 +1,8 @@
 #ifndef GAME_HEADER_FILE
 #define GAME_HEADER_FILE
 
+#include <windows.h>
+
 #include "Utility.h"
 #include "Time.h"
 #include "MVP.h"
