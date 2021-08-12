@@ -40,7 +40,7 @@ struct ObjectManager
                  float xAngle, float yAngle,
                  float speed);
     void (*move)(struct Object* obj, ObjectMove move, bool x, bool y, bool z);
-    void (*vertMove)(struct Object* obj, float gravity, float time);
+    void (*vertMove)(struct Object* obj, float gravity);
     void (*draw)(struct Object* obj, void (*voxelDraw)(float x, float y, float z));
 };
 

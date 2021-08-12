@@ -124,8 +124,9 @@ void gameLoop(struct Game* game, struct WindowGL* win, struct GlobalManager* man
                 manager->object.move(&obj, objectMoveLeft, 1, 0, 1);
                 manager->cameraGL.move(&(game->camera), cameraMoveLeft, 1, 0, 1);
             }
-            if ((event.key.keysym.sym == SDLK_SPACE) && (obj.isOnGround))
-                manager->object.vertMove(&obj, 2.5f, game->ltime.deltaTime);
+            if (event.key.keysym.sym == SDLK_SPACE && obj.isOnGround)
+                manager->object.vertMove(&obj, 2.5f);
+
         }
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
@@ -139,7 +140,7 @@ void gameLoop(struct Game* game, struct WindowGL* win, struct GlobalManager* man
 
         manager->surmap.draw(&(game->surmap), iX, iY, iZ, renderVoxels);
         manager->object.draw(&obj, renderVoxel);
-        manager->object.vertMove(&obj, -0.05f, game->ltime.deltaTime);
+        manager->object.vertMove(&obj, -0.1f);
         manager->cameraGL.update(&(game->camera), game->ltime.deltaTime);
 
         manager->object.setAngle(&obj, game->camera.xAngle, game->camera.yAngle);
@@ -149,8 +150,8 @@ void gameLoop(struct Game* game, struct WindowGL* win, struct GlobalManager* man
         manager->object.update(&obj, game->ltime.deltaTime, objectWorldIsColision);
 
         SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), (COORD){0,0});
+        printf("%f\n", obj.yVelocity);
         manager->time.update(&(game->ltime));
-        printf("%i\n%f\n", (int)obj.isOnGround, obj.yVelocity);
     }
     manager->mvp.delete(&mvp, &(manager->matrix));
     manager->render.delete(&render);

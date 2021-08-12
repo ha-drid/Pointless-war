@@ -70,6 +70,8 @@ static void objectUpdate(struct Object* obj,
                          double time,
                          bool (*objectWorldIsColision)(struct Object* obj))
 {
+    obj->isOnGround = false;
+
     obj->x += obj->xVelocity * time;
     if (objectWorldIsColision(obj)) {
         obj->x -= obj->xVelocity * time;
@@ -77,20 +79,9 @@ static void objectUpdate(struct Object* obj,
 
     obj->y += obj->yVelocity * time;
     if (objectWorldIsColision(obj)) {
-        // если скорость отрицателная, то есть падал в низ, значит он приземлился на какойто обьект
-        if (obj->yVelocity < 0)
-        {
-            obj->y -= obj->yVelocity * time;
-            obj->isOnGround = true;
-            obj->yVelocity = 0.0f;
-        }
-        // если скорость положительная, то есть летел в верх, значить обьект ударился башкой об какойто обьект
-        else if (obj->yVelocity > 0)
-        {
-            obj->y -= obj->yVelocity * time;
-            obj->yVelocity = 0.0f;
-            obj->isOnGround = false;
-        }
+        obj->y -= obj->yVelocity * time;
+        obj->yVelocity = 0.0f;
+        obj->isOnGround = true;
     }
 
     obj->z += obj->zVelocity * time;
@@ -112,19 +103,9 @@ static void objectDraw(struct Object* obj, void (*voxelDraw)(float x, float y, f
     }
 }
 
-static void objectVertMove(struct Object* obj, float gravity, float time)
+static void objectVertMove(struct Object* obj, float gravity)
 {
-    if (gravity < 0.0f) // если должны мы падать
-    {
-        if (obj->isOnGround == false) // то проверяем воздухе ли мы
-            obj->yVelocity += gravity * time;
-    }
-    else if (gravity > 0.0f) // если должны лететь верх
-    {
-        obj->yVelocity += gravity * time;
-        obj->isOnGround = false;
-    }
-    obj->isOnGround = false;
+    obj->yVelocity += gravity;
 }
 
 static bool objectIsColision(struct Object* obj, float x, float y, float z, float width, float height, float depth) {
