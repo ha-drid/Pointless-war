@@ -5,7 +5,7 @@
 
 #include "Utility.h"
 #include "Time.h"
-#include "MVP.h"
+#include "ModelViewProjectionMatrix.h"
 #include "SDL/Window.h"
 #include "GL/Render.h"
 #include "GL/Program.h"
@@ -23,10 +23,15 @@ struct Game
     struct CameraGL camera;
     struct Surmap surmap;
     struct Time ltime;
+    struct Program shader;
+    struct VertexArrayObject voxel;
+    struct ModelViewProjectionMatrix mvp;
 };
+
 
 void gameInit(struct Game* game, struct GlobalManager* manager);
 void gameLoop(struct Game* game, struct WindowGL* win, struct GlobalManager* manager);
 void gameDelete(struct Game* game, struct GlobalManager* manager);
+
 
 #endif // GAME_HEADER_FILE

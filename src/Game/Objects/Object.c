@@ -108,6 +108,18 @@ static void objectVertMove(struct Object* obj, float gravity)
     obj->yVelocity += gravity;
 }
 
+static struct Object* objectNew(float x, float y, float z, float w, float h, float d, float speed)
+{
+    struct Object* obj = malloc(sizeof(struct Object));
+    objectInit(obj, x, y, z, w, h, d, 0.0f, 0.0f, speed);
+    return obj;
+}
+
+void objectDelete(struct Object* obj)
+{
+    free(obj);
+}
+
 static bool objectIsColision(struct Object* obj, float x, float y, float z, float width, float height, float depth) {
     return isColision(obj->x, obj->y, obj->z, obj->width, obj->height, obj->depth,
                       x, y, z, width, height, depth);
@@ -125,6 +137,8 @@ struct ObjectManager objectManagerInit()
     manager.move = &objectMove;
     manager.vertMove = &objectVertMove;
     manager.isColision = &objectIsColision;
+    manager.new = &objectNew;
+    manager.delete = &objectDelete;
     return manager;
 };
 

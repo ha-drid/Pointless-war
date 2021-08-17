@@ -15,7 +15,6 @@ typedef enum {
 struct CameraGL
 {
     float x, y, z;
-    float xVelocity, yVelocity, zVelocity;
     float yAngle, xAngle;
     float speed;
 };
@@ -24,12 +23,10 @@ struct CameraGLManager
 {
     void (*init)(struct CameraGL* camera, float x, float y, float z, float xAngle, float yAngle, float speed);
     void (*rotate)(struct CameraGL* camera, float xAngleGradus, float yAngleGradus);
-    void (*move)(struct CameraGL* camera, CameraGLMove move, bool x, bool y, bool z);
+    void (*move)(struct CameraGL* camera, CameraGLMove move, float time, bool x, bool y, bool z);
     void (*setAngle)(struct CameraGL* camera, float xAngle, float yAngle);
-    void (*setVelocity)(struct CameraGL* camera, float x, float y, float z);
     void (*apply)(struct Program* program, struct ProgramManager* manager, struct CameraGL* camera,
                     const char* cameraPositionUniform, const char* cameraDirectionUniform);
-    void (*update)(struct CameraGL* camera, double time);
     void (*setPosition)(struct CameraGL* camera, float x, float y, float z);
 };
 

@@ -27,6 +27,7 @@ struct Object
 
 struct ObjectManager
 {
+    struct Object* (*new)(float x, float y, float z, float w, float h, float d, float speed);
     void (*setPosition)(struct Object* obj, float x, float y, float z);
     void (*setAngle)(struct Object* obj, float xAngle, float yAngle);
     void (*setVelocity)(struct Object* obj, float x, float y, float z);
@@ -42,6 +43,7 @@ struct ObjectManager
     void (*move)(struct Object* obj, ObjectMove move, bool x, bool y, bool z);
     void (*vertMove)(struct Object* obj, float gravity);
     void (*draw)(struct Object* obj, void (*voxelDraw)(float x, float y, float z));
+    void (*delete)(struct Object* obj);
 };
 
 struct ObjectManager objectManagerInit();

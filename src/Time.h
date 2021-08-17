@@ -18,7 +18,7 @@ struct Time
 struct TimeManager
 {
     void (*init)(struct Time* t);
-    bool (*update)(struct Time* t);
+    int (*update)(struct Time* t);
 };
 
 struct TimeManager timeManagerInit();

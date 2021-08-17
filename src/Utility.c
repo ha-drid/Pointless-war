@@ -17,10 +17,12 @@ struct GlobalManager globalManagerInit()
     manager.chunks = chunksManagerInit();
     manager.matrix = matrixManagerInit();
     manager.voxelWorld = voxelWorldManagerInit();
-    manager.mvp = mvpManagerInit();
+    manager.mvp = modelViewProjectionMatrixManagerInit();
     manager.surmap = surmapManagerInit();
     manager.object = objectManagerInit();
     manager.time = timeManagerInit();
+    manager.inventory = inventoryManagerInit();
+    manager.vao = vertexArrayObjectManagerInit();
 
     return manager;
 }

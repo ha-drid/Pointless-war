@@ -41,7 +41,7 @@
 #include "main.h"
 #include "Utility.h"
 #include "Time.h"
-#include "MVP.h"
+#include "ModelViewProjectionMatrix.h"
 #include "SDL/Window.h"
 
 #include "GL/Render.h"

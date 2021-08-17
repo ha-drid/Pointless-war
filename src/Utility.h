@@ -6,6 +6,7 @@
 #include "main.h"
 
 #include "Game/Objects/Object.h"
+#include "Game/Objects/Inventory.h"
 #include "SDL/Window.h"
 #include "GL/Render.h"
 #include "GL/Program.h"
@@ -14,7 +15,8 @@
 #include "Game/Voxels/Chunk.h"
 #include "Game/VoxelWorld.h"
 #include "Game/Surmap.h"
-#include "MVP.h"
+#include "GL/VertexArrayObject.h"
+#include "ModelViewProjectionMatrix.h"
 #include "Time.h"
 
 struct GlobalManager
@@ -25,7 +27,7 @@ struct GlobalManager
     struct CameraGLManager cameraGL;
     struct Vector3fManager vector3f;
     struct VoxelWorldManager voxelWorld;
-    struct MVPManager mvp;
+    struct ModelViewProjectionMatrixManager mvp;
     struct ChunkManager chunk;
     struct ChunksManager chunks;
     struct VoxelInstanceManager voxelInstance;
@@ -33,6 +35,8 @@ struct GlobalManager
     struct SurmapManager surmap;
     struct ObjectManager object;
     struct TimeManager time;
+    struct InventoryManager inventory;
+    struct VertexArrayObjectManager vao;
 };
 
 struct GlobalManager globalManagerInit();

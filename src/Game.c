@@ -1,4 +1,6 @@
 #include "Game.h"
+#include <clist/list.h>
+
 
 void setBlockInWorld(unsigned char* image_data,
                      int channels,
@@ -11,7 +13,7 @@ void setBlockInWorld(unsigned char* image_data,
 void gameInit(struct Game* game, struct GlobalManager* manager)
 {
     manager->time.init(&(game->ltime));
-    manager->cameraGL.init(&(game->camera), 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 2.5f);
+    manager->cameraGL.init(&(game->camera), 0.0f, 0.0f, 0.0f, 0.0f, 0.0f, 3.0f);
 
     manager->surmap.init(&(game->surmap), "res\\img\\heightmap.png", 8, 8, 8, setBlockInWorld, &(manager->chunk));
 
@@ -21,35 +23,34 @@ void gameInit(struct Game* game, struct GlobalManager* manager)
     manager->surmap.addLoadMaterial(&(game->surmap), "res\\img\\dirt.bmp", &(manager->voxelInstance));
 
     manager->surmap.setRenderDistance(&(game->surmap), 30, 30, 30);
+
+    manager->program.init(&(game->shader), "res\\glsl\\first.vert", "res\\glsl\\first.frag");
+    manager->program.link(&(game->shader));
+    manager->program.use(&(game->shader));
+
+    manager->vao.init(&(game->voxel));
+    manager->vao.addVertexBufferObject(&(game->voxel), 3, 24, CUBE_POSITION);
+    manager->vao.addIndices(&(game->voxel), 36, CUBE_INDEX);
+
+    manager->mvp.init(&(game->mvp), &(game->shader), "u_Model", "u_View", "u_Projection", &(manager->program),&(manager->matrix));
+    manager->mvp.setProjection(&(game->mvp), radians_s(90.0f), 5.0f / 3.0f, 0.1, 200.0f, &(manager->matrix));
 }
 
 void gameLoop(struct Game* game, struct WindowGL* win, struct GlobalManager* manager)
 {
-    struct Program shader;
-    manager->program.init(&shader, "res\\glsl\\first.vert", "res\\glsl\\first.frag");
-    manager->program.link(&shader);
-    manager->program.use(&shader);
-    struct Render render;
-    manager->render.init(&render);
-    manager->render.addAttribute(&render, &shader, &(manager->program),
-                                 "position", 3, 0, 0, CUBE_POSITION);
-    struct MVP mvp;
-    manager->mvp.init(&mvp,&shader,"u_projection","u_view","u_model",&(manager->program),&(manager->matrix));
-    manager->mvp.setProjection(&mvp, radians_s(90.0f), 5.0f / 3.0f, 0.1, 200.0f, &(manager->matrix));
-
     void renderVoxels(struct VoxelInstance* mesh, float x, float y, float z) {
-        manager->matrix.translate3f(&(mvp.model), x, y, z);
-        manager->mvp.modelShaderPush(&mvp);
-        manager->program.setVec3fArray(&shader, "positionInstances", mesh->voxel_size, mesh->positionInstances);
-        manager->program.setVec3fArray(&shader, "colorInstances", mesh->voxel_size, mesh->colorInstances);
-        manager->render.drawInstanced(&render, GL_TRIANGLES, 36, GL_UNSIGNED_INT, CUBE_INDEX, mesh->voxel_size);
+        manager->matrix.translate3f(&(game->mvp.model), x, y, z);
+        manager->program.setMat4fv(&(game->shader), "u_Model", 1, GL_FALSE, game->mvp.model.data);
+        manager->program.setVec3fArray(&(game->shader), "positionInstances", mesh->voxel_size, mesh->positionInstances);
+        manager->program.setVec3fArray(&(game->shader), "colorInstances", mesh->voxel_size, mesh->colorInstances);
+        manager->vao.drawElementsInstanced(&(game->voxel), GL_TRIANGLES, mesh->voxel_size);
     }
 
     void renderVoxel(float x, float y, float z) {
-        manager->matrix.translate3f(&(mvp.model), x, y, z);
-        manager->mvp.modelShaderPush(&mvp);
-        manager->program.setVec3fArray(&shader, "colorInstances", 1, VoxelColor[Stone]);
-        manager->render.draw(&render, GL_TRIANGLES, 36, GL_UNSIGNED_INT, CUBE_INDEX);
+        manager->matrix.translate3f(&(game->mvp.model), x, y, z);
+        manager->program.setMat4fv(&(game->shader), "u_Model", 1, GL_FALSE, game->mvp.model.data);
+        manager->program.setVec3fArray(&(game->shader), "colorInstances", 1, VoxelColor[Stone]);
+        manager->vao.drawElements(&(game->voxel), GL_TRIANGLES);
     }
 
     bool objectWorldIsColision(struct Object* obj) {
@@ -72,9 +73,6 @@ void gameLoop(struct Game* game, struct WindowGL* win, struct GlobalManager* man
         }
         return false;
     }
-
-    struct Object obj;
-    manager->object.init(&obj, 0.0f, 60.0f, 0.0f, 5.0f, 5.0f, 5.0f, 0.0f, 0.0f, 2.50f);
 
     bool run = true;
     while (run)
@@ -100,66 +98,39 @@ void gameLoop(struct Game* game, struct WindowGL* win, struct GlobalManager* man
             }
 
             if (event.key.keysym.sym == SDLK_w)
-                manager->cameraGL.move(&(game->camera), cameraMoveForward, 1, 1, 1);
+                manager->cameraGL.move(&(game->camera), cameraMoveForward, game->ltime.deltaTime, 1, 1, 1);
             if (event.key.keysym.sym == SDLK_s)
-                manager->cameraGL.move(&(game->camera), cameraMoveBackward, 1, 1, 1);
+                manager->cameraGL.move(&(game->camera), cameraMoveBackward, game->ltime.deltaTime, 1, 1, 1);
             if (event.key.keysym.sym == SDLK_a)
-                manager->cameraGL.move(&(game->camera), cameraMoveLeft, 1, 1, 1);
+                manager->cameraGL.move(&(game->camera), cameraMoveLeft, game->ltime.deltaTime, 1, 1, 1);
             if (event.key.keysym.sym == SDLK_d)
-                manager->cameraGL.move(&(game->camera), cameraMoveRight, 1, 1, 1);
-
-            if (event.key.keysym.sym == SDLK_UP) {
-                manager->object.move(&obj, objectMoveForward, 1, 0, 1);
-                manager->cameraGL.move(&(game->camera), cameraMoveForward, 1, 0, 1);
-            }
-            if (event.key.keysym.sym == SDLK_DOWN) {
-                manager->object.move(&obj, objectMoveBackward, 1, 0, 1);
-                manager->cameraGL.move(&(game->camera), cameraMoveBackward, 1, 0, 1);
-            }
-            if (event.key.keysym.sym == SDLK_RIGHT) {
-                manager->object.move(&obj, objectMoveRight, 1, 0, 1);
-                manager->cameraGL.move(&(game->camera), cameraMoveRight, 1, 0, 1);
-            }
-            if (event.key.keysym.sym == SDLK_LEFT) {
-                manager->object.move(&obj, objectMoveLeft, 1, 0, 1);
-                manager->cameraGL.move(&(game->camera), cameraMoveLeft, 1, 0, 1);
-            }
-            if (event.key.keysym.sym == SDLK_SPACE && obj.isOnGround)
-                manager->object.vertMove(&obj, 2.5f);
-
+                manager->cameraGL.move(&(game->camera), cameraMoveRight, game->ltime.deltaTime, 1, 1, 1);
         }
 
         glClear(GL_COLOR_BUFFER_BIT | GL_DEPTH_BUFFER_BIT);
         glClearColor(1.0f, 1.0f, 0.0f, 1.0f);
+        manager->program.use(&(game->shader));
 
-        manager->mvp.setView(&mvp, &(game->camera), &(manager->vector3f), &(manager->matrix));
+        manager->mvp.setView(&game->mvp, &(game->camera), &(manager->vector3f), &(manager->matrix));
+        // draw
+        {
+            float iX = ((int)round(game->camera.x) - ((int)round(game->camera.x) % 8)) / 8;
+            float iY = ((int)round(game->camera.y) - ((int)round(game->camera.y) % 8)) / 8;
+            float iZ = ((int)round(game->camera.z) - ((int)round(game->camera.z) % 8)) / 8;
 
-        float iX = ((int)round(game->camera.x) - ((int)round(game->camera.x) % 8)) / 8;
-        float iY = ((int)round(game->camera.y) - ((int)round(game->camera.y) % 8)) / 8;
-        float iZ = ((int)round(game->camera.z) - ((int)round(game->camera.z) % 8)) / 8;
-
-        manager->surmap.draw(&(game->surmap), iX, iY, iZ, renderVoxels);
-        manager->object.draw(&obj, renderVoxel);
-        manager->object.vertMove(&obj, -0.1f);
-        manager->cameraGL.update(&(game->camera), game->ltime.deltaTime);
-
-        manager->object.setAngle(&obj, game->camera.xAngle, game->camera.yAngle);
-
-
-        manager->windowGL.swap(*win);
-        manager->object.update(&obj, game->ltime.deltaTime, objectWorldIsColision);
-
+            manager->surmap.draw(&(game->surmap), iX, iY, iZ, renderVoxels);
+        }
         SetConsoleCursorPosition(GetStdHandle(STD_OUTPUT_HANDLE), (COORD){0,0});
-        printf("%f\n", obj.yVelocity);
-        manager->time.update(&(game->ltime));
+        int fps = manager->time.update(&(game->ltime));
+        if (fps != 0) {system("cls"); printf("FPS : %i", fps); }
+        manager->windowGL.swap(*win);
     }
-    manager->mvp.delete(&mvp, &(manager->matrix));
-    manager->render.delete(&render);
-    manager->program.delete(&shader);
 }
 
 void gameDelete(struct Game* game, struct GlobalManager* manager)
 {
+    manager->mvp.delete(&(game->mvp), &(manager->matrix));
+    manager->vao.delete(&(game->voxel));
+    manager->program.delete(&(game->shader));
     manager->surmap.delete(&(game->surmap), &(manager->voxelInstance), &(manager->chunk));
-    //manager->mvp.delete(&(game->mvp), &(manager->matrix));
 }

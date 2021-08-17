@@ -1,6 +1,6 @@
 #include "vec3.h"
 
-vec3f vector3f_subtraction(vec3f vec1, vec3f vec2)
+static vec3f vector3f_subtraction(vec3f vec1, vec3f vec2)
 {
     vec3f var;
     var.x = vec1.x - vec2.x;
@@ -10,7 +10,7 @@ vec3f vector3f_subtraction(vec3f vec1, vec3f vec2)
     return var;
 }
 
-vec3f vector3f_addition(vec3f vec1, vec3f vec2)
+static vec3f vector3f_addition(vec3f vec1, vec3f vec2)
 {
     vec3f var;
 
@@ -21,7 +21,7 @@ vec3f vector3f_addition(vec3f vec1, vec3f vec2)
     return var;
 }
 
-vec3f vector3f_normalize(vec3f vec)
+static vec3f vector3f_normalize(vec3f vec)
 {
     vec3f var;
 
@@ -32,7 +32,7 @@ vec3f vector3f_normalize(vec3f vec)
     return var;
 }
 
-vec3f vector3f_cross(vec3f vec1, vec3f vec2)
+static vec3f vector3f_cross(vec3f vec1, vec3f vec2)
 {
     vec3f var;
 
@@ -43,16 +43,30 @@ vec3f vector3f_cross(vec3f vec1, vec3f vec2)
     return var;
 }
 
-float vector3f_dot(vec3f vec1, vec3f vec2)
+static float vector3f_dot(vec3f vec1, vec3f vec2)
 {
     return (vec1.x * vec2.x) + (vec1.y * vec2.y) + (vec1.z * vec2.z);
 }
 
-void vector3f_set(vec3f* vec, float x, float y, float z)
+static void vector3f_set(vec3f* vec, float x, float y, float z)
 {
     vec->x = x;
     vec->y = y;
     vec->z = z;
+}
+
+static vec3f* vector3f_new(float x,  float y, float z)
+{
+    vec3f* vec = malloc(sizeof(vec3f));
+    vec->x = x;
+    vec->y = y;
+    vec->z = z;
+    return vec;
+}
+
+static void vector3f_delete(vec3f* vec)
+{
+    free(vec);
 }
 
 struct Vector3fManager vector3fManagerInit()
@@ -63,6 +77,8 @@ struct Vector3fManager vector3fManagerInit()
     manager.dot = &vector3f_dot;
     manager.normalize = &vector3f_normalize;
     manager.set = &vector3f_set;
+    manager.new = &vector3f_new;
+    manager.delete = &vector3f_delete;
     manager.subtraction = &vector3f_subtraction;
 
     return manager;
