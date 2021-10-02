@@ -7,27 +7,25 @@
 
 #include "Voxel.h"
 
-struct Chunk
+typedef struct Chunk
 {
     struct Voxel* voxels;
-};
+    uint8_t width, height, depth;
+} Chunk;
 
-struct ChunkManager
+typedef struct ChunkManager
 {
-    void (*init)(struct Chunk* chunk, uint32_t widthChunk, uint32_t heightChunk, uint32_t depthChunk);
-    void (*fill)(struct Chunk* chunk, uint32_t widthChunk, uint32_t heightChunk, uint32_t depthChunk, struct Voxel voxel);
-    void (*randFill)(struct Chunk* chunk, uint32_t widthChunk, uint32_t heightChunk, uint32_t depthChunk, uint32_t size);
-    void (*setVoxel)(struct Chunk* chunk,
+    void (*init)(struct Chunk* const chunk, uint32_t widthChunk, uint32_t heightChunk, uint32_t depthChunk);
+    void (*fill)(struct Chunk* const chunk, struct Voxel voxel);
+    void (*randFill)(struct Chunk* const chunk, uint32_t size);
+    void (*setVoxel)(struct Chunk* const chunk,
                      uint32_t x,
                      uint32_t y,
                      uint32_t z,
-                     uint32_t widthChunk,
-                     uint32_t heightChunk,
-                     uint32_t depthChunk,
                      struct Voxel vox);
-    Voxel (*getVoxel)(struct Chunk* chunk, int x, int y, int z, int width, int height, int depth);
-    void (*delete)(struct Chunk* chunk);
-};
+    Voxel (*getVoxel)(struct Chunk* const chunk, int x, int y, int z);
+    void (*delete)(struct Chunk* const chunk);
+} ChunkManager;
 
 struct ChunkManager chunkManagerInit();
 

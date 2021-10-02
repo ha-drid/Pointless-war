@@ -1,58 +1,34 @@
 #include "VoxelInstance.h"
 
-static void voxelInstanceInit(struct VoxelInstance* mesh, uint32_t max_voxel_size)
+static void voxelInstanceInit(VoxelInstance* const ins, uint32_t bufferSize)
 {
-    mesh->voxel_size = 0;
-
-    uint32_t capacity = max_voxel_size * 3;
-    mesh->colorInstances = (float*)malloc(sizeof(float) * capacity);
-    mesh->positionInstances = (float*)malloc(sizeof(float) * capacity);
+    ins->voxelSize = 0;
+    vectorInit((ins->buffer), bufferSize);
 }
 
-static void voxelInstanceUpdate(struct VoxelInstance* mesh,
-                         struct Chunk* chunk,
-                         uint32_t chunk_width,
-                         uint32_t chunk_height,
-                         uint32_t chunk_depth,
-                         float (*getVoxelColor)(struct Voxel vox, uint32_t index))
+void voxelInstanceUpdateBuffers(VoxelInstance* const ins, int chunkPos[3],
+                                                                void (*const instanceUpdate)
+                                (uint32_t* voxelSize, int chunkPos[3], vector(vector(float))* data))
 {
-    uint32_t index = 0;
-    for (uint32_t iZ = 0; iZ < chunk_depth; ++iZ)
-    {
-        for (uint32_t iY = 0; iY < chunk_height; ++iY)
-        {
-            for (uint32_t iX = 0; iX < chunk_width; ++iX)
-            {
-                if (chunk->voxels[index].iD != 0)
-                {
-                    mesh->positionInstances[(index * 3) + 0] = iX;
-                    mesh->positionInstances[(index * 3) + 1] = iY;
-                    mesh->positionInstances[(index * 3) + 2] = iZ;
+    instanceUpdate(&(ins->voxelSize), chunkPos, &(ins->buffer));
+}
 
-                    mesh->colorInstances[(index * 3) + 0] = getVoxelColor(chunk->voxels[index], 0); // red
-                    mesh->colorInstances[(index * 3) + 1] = getVoxelColor(chunk->voxels[index], 1); // green
-                    mesh->colorInstances[(index * 3) + 2] = getVoxelColor(chunk->voxels[index], 2); // blue
+static void voxelInstanceDelete(struct VoxelInstance* const mesh)
+{
+    mesh->voxelSize = 0;
 
-                    ++index;
-                }
-            }
-        }
+    for (uint32_t i = 0; i < mesh->buffer.capacity; ++i) {
+        vectorDelete(mesh->buffer.data[i])
     }
-    mesh->voxel_size = index;
+
+    vectorDelete(mesh->buffer);
 }
 
-static void voxelInstanceDelete(struct VoxelInstance* mesh)
-{
-    mesh->voxel_size = 0;
-    free(mesh->positionInstances);
-    free(mesh->colorInstances);
-}
-
-struct VoxelInstanceManager voxelInstanceManagerInit()
+VoxelInstanceManager voxelInstanceManagerInit()
 {
     struct VoxelInstanceManager manager;
     manager.delete = &voxelInstanceDelete;
+    manager.updateBuffers = &voxelInstanceUpdateBuffers;
     manager.init = &voxelInstanceInit;
-    manager.update = &voxelInstanceUpdate;
     return manager;
 };

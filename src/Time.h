@@ -6,19 +6,20 @@
 #include <SDL2/SDL_timer.h>
 
 /**<  Это структура нужна для того чтобы понять сколько кадр длился и сколько fps в секунду*/
-struct Time
+typedef struct Time
 {
-    double nowTime;
-    double lastTime;
-    double deltaTime;
+    uint32_t nowTime;
+    uint32_t lastTime;
+    uint32_t deltaTime;
 
     uint32_t fps;
-};
+} Time;
 
 struct TimeManager
 {
-    void (*init)(struct Time* t);
-    int (*update)(struct Time* t);
+    void (*init)(struct Time* const t);
+    void (*update)(struct Time* const t);
+    void (*frameEnded)(struct Time* const t);
 };
 
 struct TimeManager timeManagerInit();

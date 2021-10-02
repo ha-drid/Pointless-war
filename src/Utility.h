@@ -5,39 +5,44 @@
 
 #include "main.h"
 
-#include "Game/Objects/Object.h"
-#include "Game/Objects/Inventory.h"
+#include "Game/Units/Object.h"
+#include "Game/Units/Inventory.h"
 #include "SDL/Window.h"
-#include "GL/Render.h"
 #include "GL/Program.h"
-#include "Util/matrix.h"
 #include "GL/CameraGL.h"
 #include "Game/Voxels/Chunk.h"
-#include "Game/VoxelWorld.h"
-#include "Game/Surmap.h"
+#include "Game/Voxels/VoxelInstance.h"
 #include "GL/VertexArrayObject.h"
-#include "ModelViewProjectionMatrix.h"
 #include "Time.h"
+#include "GL/VertexArray.h"
+#include "Objects.h"
+#include "MainPlayer.h"
+#include "AsciiWorld.h"
+#include "Util/Image.h"
+#include "GL/Texture.h"
+#include "Screen.h"
+#include "Items.h"
 
-struct GlobalManager
+typedef struct GlobalManager
 {
     struct WindowGLManager windowGL;
-    struct RenderManager render;
     struct ProgramManager program;
     struct CameraGLManager cameraGL;
-    struct Vector3fManager vector3f;
-    struct VoxelWorldManager voxelWorld;
-    struct ModelViewProjectionMatrixManager mvp;
     struct ChunkManager chunk;
-    struct ChunksManager chunks;
     struct VoxelInstanceManager voxelInstance;
-    struct MatrixManager matrix;
-    struct SurmapManager surmap;
     struct ObjectManager object;
     struct TimeManager time;
-    struct InventoryManager inventory;
+//    struct InventoryManager inventory;
     struct VertexArrayObjectManager vao;
-};
+    struct VertexArrayManager vertexArray;
+    struct ObjectsManager objects;
+    struct MainPlayerManager mainPlayer;
+    struct ScreenManager screen;
+    struct AsciiWorldManager asciiWorld;
+    struct ImageManager image;
+    struct TextureManager texture;
+    struct InventoryIconsManager inventoryIcon;
+} GlobalManager;
 
 struct GlobalManager globalManagerInit();
 float voxelGetColor(struct Voxel vox, uint32_t index);

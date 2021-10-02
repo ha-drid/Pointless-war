@@ -1,21 +1,21 @@
 #include <glad\glad.h>
+
 #include "VertexArrayObject.h"
 
-static void vaoInit(struct VertexArrayObject* vao) {
+static void vaoInit(struct VertexArrayObject* const vao) {
 	glGenVertexArrays(1, &(vao->vao));
-	vao->buffers.data = NULL;
-	vao->buffers.size = 0;
+	vectorInit(vao->buffers, 0);
 
 	vao->indicesBuffer = 0;
 	vao->indicesCount = 0;
 }
 
-static void vaoBind(struct VertexArrayObject* vao)
+static void vaoBind(struct VertexArrayObject* const vao)
 {
     glBindVertexArray(vao->vao);
 }
 
-static void vaoAddVertexBufferObject(struct VertexArrayObject* vao, uint32_t vertexInPoint, size_t arraySize, float* array) {
+static void vaoAddVertexBufferObject(struct VertexArrayObject* const vao, uint32_t vertexInPoint, size_t arraySize, float* array) {
     vaoBind(vao);
     // create vbo
     GLuint vbo;
@@ -25,13 +25,10 @@ static void vaoAddVertexBufferObject(struct VertexArrayObject* vao, uint32_t ver
 	glVertexAttribPointer(vao->buffers.size, vertexInPoint, GL_FLOAT, GL_FALSE, 0, NULL);
 
 	// push
-	uint32_t push_back = vao->buffers.size;
-	++vao->buffers.size;
-	vao->buffers.data = realloc(vao->buffers.data, vao->buffers.size);
-	vao->buffers.data[push_back] = vbo;
+	vectorPushBack(vao->buffers, vbo);
 }
 
-void vaoAddIndices(struct VertexArrayObject* vao, size_t array_size, unsigned* array) {
+static void vaoAddIndices(struct VertexArrayObject* const vao, size_t array_size, unsigned* array) {
     assert(vao->indicesBuffer == 0); // мы не можем создать ещё один буфер
     vao->indicesCount = array_size;
 
@@ -44,7 +41,7 @@ void vaoAddIndices(struct VertexArrayObject* vao, size_t array_size, unsigned* a
 	glBufferData(GL_ELEMENT_ARRAY_BUFFER, array_size * sizeof(unsigned), array, GL_STATIC_DRAW);
 }
 
-static void vaoDrawArrays(struct VertexArrayObject* vao, unsigned type, unsigned count)
+static void vaoDrawArrays(struct VertexArrayObject* const vao, unsigned type, unsigned count)
 {
     vaoBind(vao);
 	for (uint32_t i = 0; i < vao->buffers.size; ++i)
@@ -56,7 +53,7 @@ static void vaoDrawArrays(struct VertexArrayObject* vao, unsigned type, unsigned
 		glDisableVertexAttribArray(i);
 }
 
-static void vaoDrawElements(struct VertexArrayObject* vao,unsigned type)
+static void vaoDrawElements(struct VertexArrayObject* const vao,unsigned type)
 {
 	assert(vao->indicesBuffer != 0);
 
@@ -71,7 +68,7 @@ static void vaoDrawElements(struct VertexArrayObject* vao,unsigned type)
 		glDisableVertexAttribArray(i);
 }
 
-void vaoDrawElementsInstanced(struct VertexArrayObject* vao, unsigned type, uint32_t instanceCount) {
+void vaoDrawElementsInstanced(struct VertexArrayObject* const vao, unsigned type, uint32_t instanceCount) {
     assert(vao->indicesBuffer != 0);
 
 	vaoBind(vao);
@@ -89,7 +86,7 @@ void vaoDrawElementsInstanced(struct VertexArrayObject* vao, unsigned type, uint
 	}
 }
 
-static void vaoDelete(struct VertexArrayObject* vao) {
+static void vaoDelete(struct VertexArrayObject* const vao) {
     vao->indicesCount = 0;
     // delete vbo
     glDeleteBuffers(vao->buffers.size, vao->buffers.data);

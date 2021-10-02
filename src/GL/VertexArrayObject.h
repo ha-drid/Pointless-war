@@ -4,14 +4,11 @@
 #include <stdint.h>
 #include <glad/glad.h>
 #include <assert.h>
+#include <cvector/vector.h>
 
-struct VertexArrayObject
+typedef struct VertexArrayObject
 {
-    struct
-    {
-        GLuint* data;
-        uint32_t size;
-    } buffers;
+    vector(GLuint) buffers;
 
     /**
     * \brief Буфер индексов
@@ -24,20 +21,22 @@ struct VertexArrayObject
     size_t indicesCount;
 
     GLuint vao;
-};
+} VertexArrayObject;
 
-struct VertexArrayObjectManager
+typedef VertexArrayObject VAO;
+
+typedef struct VertexArrayObjectManager
 {
-    void (*init)(struct VertexArrayObject* vao);
-    void (*bind)(struct VertexArrayObject* vao);
-    void (*addVertexBufferObject)(struct VertexArrayObject* vao, uint32_t vertexInPoint, size_t arraySize, float* array);
-    void (*addIndices)(struct VertexArrayObject* vao, size_t array_size, unsigned* array);
-    void (*drawElements)(struct VertexArrayObject* vao, unsigned type);
-    void (*drawElementsInstanced)(struct VertexArrayObject* vao, unsigned type, uint32_t instanceCount);
-    void (*drawArrays)(struct VertexArrayObject* vao, unsigned type, unsigned count);
-    void (*delete)(struct VertexArrayObject* vao);
-};
+    void (*init)(VertexArrayObject* const vao);
+    void (*bind)(VertexArrayObject* const vao);
+    void (*addVertexBufferObject)(VertexArrayObject* const vao, uint32_t vertexInPoint, size_t arraySize, float* array);
+    void (*addIndices)(VertexArrayObject* const vao, size_t array_size, unsigned* array);
+    void (*drawElements)(VertexArrayObject* const vao, unsigned type);
+    void (*drawElementsInstanced)(VertexArrayObject* const vao, unsigned type, uint32_t instanceCount);
+    void (*drawArrays)(VertexArrayObject* const vao, unsigned type, unsigned count);
+    void (*delete)(VertexArrayObject* const vao);
+} VertexArrayObjectManager;
 
-struct VertexArrayObjectManager vertexArrayObjectManagerInit();
+VertexArrayObjectManager vertexArrayObjectManagerInit();
 
 #endif // VAO_HEADER_FILE

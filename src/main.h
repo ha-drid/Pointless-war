@@ -41,6 +41,18 @@ static const float CUBE_POSITION[24] = {
     1.0f, 1.0f, 1.0f,
 };
 
+static const float CUBE_UV[16] = {
+    0.0f, 1.0f,
+    1.0f, 1.0f,
+    1.0f, 0.0f,
+    0.0f, 0.0f,
+
+    1.0f, 0.0f,
+    1.0f, 1.0f,
+    0.0f, 1.0f,
+    0.0f, 0.0f,
+};
+
 static const unsigned CUBE_INDEX[36] = {
     0, 1, 2,
     1, 2, 3,
@@ -66,6 +78,26 @@ enum VoxelType
     Grass,
     Stone,
     Dirt,
+};
+
+static const float RectPosition[18] = {
+    0.0f, 0.0f, 0.0f,
+    1.0f, 0.0f, 0.0f,
+    0.0f, 1.0f, 0.0f,
+
+    1.0f, 0.0f, 0.0f,
+    0.0f, 1.0f, 0.0f,
+    1.0f, 1.0f, 0.0f,
+};
+
+static const float RectColor[24] = {
+    0.0f, 0.0f, 0.0f, 0.5f,
+    1.0f, 0.0f, 0.0f, 0.5f,
+    0.0f, 1.0f, 0.0f, 0.5f,
+
+    1.0f, 0.0f, 0.0f, 0.5f,
+    0.0f, 1.0f, 0.0f, 0.5f,
+    1.0f, 1.0f, 0.0f, 0.5f
 };
 
 static const float VoxelColor[5][3] = {

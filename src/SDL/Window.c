@@ -1,6 +1,6 @@
 #include "Window.h"
 
-static void WindowGLinit(WindowGL* windowGL, const char* name, int width, int height, unsigned sdl_flags)
+static void WindowGLinit(WindowGL* const windowGL, const char* name, int width, int height, unsigned sdl_flags)
 {
     windowGL->window = SDL_CreateWindow(name,
                                    SDL_WINDOWPOS_UNDEFINED,
@@ -12,18 +12,23 @@ static void WindowGLinit(WindowGL* windowGL, const char* name, int width, int he
     windowGL->contex = SDL_GL_CreateContext(windowGL->window);
 }
 
-static void WindowGLdelete(WindowGL* windowGL)
+static void WindowGLdelete(WindowGL* const windowGL)
 {
     SDL_GL_DeleteContext(windowGL->contex);
     SDL_DestroyWindow(windowGL->window);
 }
 
-static void WindowGLswap(WindowGL windowGL)
+static void WindowGLswap(WindowGL* const windowGL)
 {
-    SDL_GL_SwapWindow(windowGL.window);
+    SDL_GL_SwapWindow(windowGL->window);
 }
 
-static bool WindowGLisFocused(WindowGL* win)
+static void WindowGLsetWindowInputFocus(WindowGL* const win)
+{
+    SDL_SetWindowInputFocus(win->window);
+}
+
+static bool WindowGLisFocused(WindowGL* const win)
 {
     return SDL_GetGrabbedWindow != win->window;
 }
@@ -35,5 +40,6 @@ WindowGLManager windowGLManagerInit()
     manager.delete = &WindowGLdelete;
     manager.swap = &WindowGLswap;
     manager.isFocused = &WindowGLisFocused;
+    manager.setWindowInputFocus = &WindowGLsetWindowInputFocus;
     return manager;
 }

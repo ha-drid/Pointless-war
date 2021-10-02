@@ -2,9 +2,11 @@
 
 out vec4 color;
 
-in vec4 pass_color;
+in vec2 pass_uv;
+
+uniform sampler2D tex;
 
 void main()
 {
-	color = pass_color;
+	color = texture(tex, pass_uv);
 }

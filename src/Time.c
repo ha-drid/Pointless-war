@@ -1,28 +1,22 @@
 #include "Time.h"
 
-static void timeInit(struct Time* t)
+static void timeInit(struct Time* const t)
 {
-    t->lastTime = 0.0;
-    t->nowTime = 0.0;
-    t->deltaTime = 0.0;
+    t->lastTime = 0;
+    t->nowTime = 0;
+    t->deltaTime = 0;
     t->fps = 0;
 }
 
-static int timeUpdate(struct Time* t)
+static void timeUpdate(struct Time* const t)
 {
-    t->nowTime = SDL_GetTicks();
-    t->deltaTime = (t->nowTime - t->lastTime) * 0.001;
+   t->nowTime = SDL_GetTicks();
+   t->deltaTime = t->nowTime - t->lastTime;
+}
 
-    if (t->nowTime > t->lastTime + 1000) {
-        //printf("fps: %u\n", t->fps);
-        int fps = t->fps;
-        t->fps = 0;
-        t->lastTime = t->nowTime;
-        return fps;
-    }
-
-    ++t->fps;
-    return 0;
+static void timeFrameEnded(struct Time* const t)
+{
+    t->lastTime = t->nowTime;
 }
 
 struct TimeManager timeManagerInit()
@@ -31,6 +25,7 @@ struct TimeManager timeManagerInit()
 
     manager.init = &timeInit;
     manager.update = &timeUpdate;
+    manager.frameEnded = &timeFrameEnded;
 
     return manager;
 };

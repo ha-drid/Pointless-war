@@ -2,71 +2,21 @@
 
 // input variable
 attribute vec3 position;
+attribute vec2 uv;
 
-uniform vec3 camera_direction;
-uniform vec3 camera_position;
-uniform vec3 u_rotate;
-uniform mat4 u_model;
-uniform mat4 u_view;
-uniform mat4 u_projection;
-uniform float angle_radians;
+uniform mat4 u_Model;
+uniform mat4 u_ViewProjection;
 uniform vec3 positionInstances[670];
-uniform vec3 colorInstances[670];
+uniform vec2 uvInstances[670];
 
 // output variable
-out vec4 pass_color;
+out vec2 pass_uv;
+uniform vec2 u_uv;
 
-//	functions
-mat4 setMat4Value(float x);
-mat4 rotate(mat4 matrix, float angle, vec3 vector);
-
-// 
 void main()
 {		   
-	mat4 mvp = u_projection * u_view * u_model;
-	
-	gl_Position = mvp * vec4(position + positionInstances[gl_InstanceID], 1);
-	pass_color = vec4(colorInstances[gl_InstanceID], 1);
-}
-
-mat4 rotate(mat4 matrix, float angle, vec3 vector)
-{
-	float a = angle;
-	float c = cos(a);
-	float s = sin(a);
-
-	vec3 axis = normalize(vector);
-	vec3 temp = vec3((1.0 - c) * axis);
-
-	mat4 rotate_matrix;
-	rotate_matrix[0][0] = c + temp[0] * axis[0];
-	rotate_matrix[0][1] = temp[0] * axis[1] + s * axis[2];
-	rotate_matrix[0][2] = temp[0] * axis[2] - s * axis[1];
-
-	rotate_matrix[1][0] = temp[1] * axis[0] - s * axis[2];
-	rotate_matrix[1][1] = c + temp[1] * axis[1];
-	rotate_matrix[1][2] = temp[1] * axis[2] + s * axis[0];
-
-	rotate_matrix[2][0] = temp[2] * axis[0] + s * axis[1];
-	rotate_matrix[2][1] = temp[2] * axis[1] - s * axis[0];
-	rotate_matrix[2][2] = c + temp[2] * axis[2];
-
-	mat4 result;
-	result[0] = matrix[0] * rotate_matrix[0][0] + matrix[1] * rotate_matrix[0][1] + matrix[2] * rotate_matrix[0][2];
-	result[1] = matrix[0] * rotate_matrix[1][0] + matrix[1] * rotate_matrix[1][1] + matrix[2] * rotate_matrix[1][2];
-	result[2] = matrix[0] * rotate_matrix[2][0] + matrix[1] * rotate_matrix[2][1] + matrix[2] * rotate_matrix[2][2];
-	result[3] = matrix[3];
-	
-	return result;
-}
-
-mat4 setMat4Value(float x)
-{
-	mat4 result;
-	result[0] = vec4(x, 0, 0, 0);
-	result[1] = vec4(0, x, 0, 0);
-	result[2] = vec4(0, 0, x, 0);
-	result[3] = vec4(0, 0, 0, x);
-	
-	return result;
+	//gl_Position = (u_ViewProjection * u_Model) * vec4(position + positionInstances[gl_InstanceID], 1);
+	//pass_uv = uv + uvInstances[gl_InstanceID];
+	gl_Position = (u_ViewProjection * u_Model) * vec4(position + positionInstances[gl_InstanceID], 1);
+	pass_uv = uv + uvInstances[gl_InstanceID];
 }
