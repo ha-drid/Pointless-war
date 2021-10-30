@@ -15,6 +15,11 @@ static void vaoBind(struct VertexArrayObject* const vao)
     glBindVertexArray(vao->vao);
 }
 
+static void vaoRebind()
+{
+    glBindVertexArray(0);
+}
+
 static void vaoAddVertexBufferObject(struct VertexArrayObject* const vao, uint32_t vertexInPoint, size_t arraySize, float* array) {
     vaoBind(vao);
     // create vbo
@@ -102,6 +107,7 @@ struct VertexArrayObjectManager vertexArrayObjectManagerInit()
     manager.addVertexBufferObject = &vaoAddVertexBufferObject;
     manager.addIndices = &vaoAddIndices;
     manager.bind = &vaoBind;
+    manager.rebind = &vaoRebind;
     manager.delete = &vaoDelete;
     manager.drawElements = &vaoDrawElements;
     manager.drawArrays = &vaoDrawArrays;

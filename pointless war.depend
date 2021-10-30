@@ -1,0 +1,1075 @@
+# depslib dependency file v1.0
+1628921218 source:f:\c project\repos\pointless war\libs\include\clist\list.c
+	"list.h"
+
+1628921248 f:\c project\repos\pointless war\libs\include\clist\list.h
+	<stdlib.h>
+	<string.h>
+
+1628915786 source:f:\c project\repos\pointless war\libs\include\clist\list_iterator.c
+	"list.h"
+
+1628921188 source:f:\c project\repos\pointless war\libs\include\clist\list_node.c
+	"list.h"
+
+1631445984 source:f:\c project\repos\pointless war\src\asciiworld.c
+	"AsciiWorld.h"
+	<cbitset/bitset.h>
+
+1631442018 f:\c project\repos\pointless war\src\asciiworld.h
+	"Game/Voxels/Voxel.h"
+	"Game/Voxels/Chunk.h"
+	"Game/Voxels/VoxelInstance.h"
+	"GL/VertexArrayObject.h"
+
+1625890470 f:\c project\repos\pointless war\src\game\voxels\voxel.h
+	<stdint-gcc.h>
+
+1631006634 f:\c project\repos\pointless war\src\game\voxels\chunk.h
+	<float.h>
+	<stdlib.h>
+	<stdbool.h>
+	"Voxel.h"
+
+1631356270 f:\c project\repos\pointless war\src\game\voxels\voxelinstance.h
+	"Voxel.h"
+	"Chunk.h"
+	<cvector/vector.h>
+
+1631271138 f:\c project\repos\pointless war\libs\include\cvector\vector.h
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+
+1635056152 f:\c project\repos\pointless war\src\gl\vertexarrayobject.h
+	<stdint.h>
+	<glad/glad.h>
+	<assert.h>
+	<cvector/vector.h>
+
+1610458170 f:\c project\repos\pointless war\libs\include\glad\glad.h
+	<KHR/khrplatform.h>
+
+1610458170 f:\c project\repos\pointless war\libs\include\khr\khrplatform.h
+	<stdint.h>
+	<inttypes.h>
+	<stdint.h>
+
+1628486870 f:\c project\repos\pointless war\libs\include\cbitset\bitset.h
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	<stdbool.h>
+	<stdio.h>
+	<string.h>
+	"portability.h"
+
+1628486932 f:\c project\repos\pointless war\libs\include\cbitset\portability.h
+	<stdint.h>
+	<intrin.h>
+
+1635615628 source:f:\c project\repos\pointless war\src\canvas.c
+	"Canvas.h"
+
+1635615538 f:\c project\repos\pointless war\src\canvas.h
+	<stdint.h>
+	<cglm/cglm.h>
+	"GL/Texture.h"
+	"GL/Program.h"
+	"GL/VertexArrayObject.h"
+	"Game/Voxels/VoxelInstance.h"
+	"Util/Image.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\cglm.h
+	"common.h"
+	"vec2.h"
+	"vec3.h"
+	"vec4.h"
+	"mat4.h"
+	"mat3.h"
+	"mat2.h"
+	"affine.h"
+	"cam.h"
+	"frustum.h"
+	"quat.h"
+	"euler.h"
+	"plane.h"
+	"box.h"
+	"color.h"
+	"util.h"
+	"io.h"
+	"project.h"
+	"sphere.h"
+	"ease.h"
+	"curve.h"
+	"bezier.h"
+	"ray.h"
+	"affine2d.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\common.h
+	<stdint.h>
+	<stddef.h>
+	<math.h>
+	<float.h>
+	<stdbool.h>
+	"types.h"
+	"simd/intrin.h"
+
+1629625254 f:\c project\repos\pointless war\libs\include\cglm\types.h
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\simd\intrin.h
+	<xmmintrin.h>
+	<emmintrin.h>
+	<x86intrin.h>
+	<smmintrin.h>
+	<nmmintrin.h>
+	<immintrin.h>
+	<arm_neon.h>
+	"x86.h"
+	"arm.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\simd\x86.h
+	"intrin.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\simd\arm.h
+	"intrin.h"
+
+1629625254 f:\c project\repos\pointless war\libs\include\cglm\vec2.h
+	"common.h"
+	"util.h"
+	"vec2-ext.h"
+
+1629625254 f:\c project\repos\pointless war\libs\include\cglm\util.h
+	"common.h"
+
+1629625254 f:\c project\repos\pointless war\libs\include\cglm\vec2-ext.h
+	"common.h"
+	"util.h"
+
+1629625254 f:\c project\repos\pointless war\libs\include\cglm\vec3.h
+	"common.h"
+	"vec4.h"
+	"vec3-ext.h"
+	"util.h"
+
+1629625254 f:\c project\repos\pointless war\libs\include\cglm\vec4.h
+	"common.h"
+	"vec4-ext.h"
+	"util.h"
+
+1629625254 f:\c project\repos\pointless war\libs\include\cglm\vec4-ext.h
+	"common.h"
+	"vec3-ext.h"
+
+1629625254 f:\c project\repos\pointless war\libs\include\cglm\vec3-ext.h
+	"common.h"
+	"util.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\mat4.h
+	"common.h"
+	"vec4.h"
+	"vec3.h"
+	"simd/sse2/mat4.h"
+	"simd/avx/mat4.h"
+	"simd/neon/mat4.h"
+	<assert.h>
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\simd\sse2\mat4.h
+	"../../common.h"
+	"../intrin.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\simd\avx\mat4.h
+	"../../common.h"
+	"../intrin.h"
+	<immintrin.h>
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\simd\neon\mat4.h
+	"../../common.h"
+	"../intrin.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\mat3.h
+	"common.h"
+	"vec3.h"
+	"simd/sse2/mat3.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\simd\sse2\mat3.h
+	"../../common.h"
+	"../intrin.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\mat2.h
+	"common.h"
+	"vec2.h"
+	"simd/sse2/mat2.h"
+	"simd/neon/mat2.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\simd\sse2\mat2.h
+	"../../common.h"
+	"../intrin.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\simd\neon\mat2.h
+	"../../common.h"
+	"../intrin.h"
+
+1629628982 f:\c project\repos\pointless war\libs\include\cglm\affine.h
+	"common.h"
+	"util.h"
+	"vec3.h"
+	"vec4.h"
+	"mat4.h"
+	"affine-mat.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\affine-mat.h
+	"common.h"
+	"mat4.h"
+	"mat3.h"
+	"simd/sse2/affine.h"
+	"simd/avx/affine.h"
+	"simd/neon/affine.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\simd\sse2\affine.h
+	"../../common.h"
+	"../intrin.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\simd\avx\affine.h
+	"../../common.h"
+	"../intrin.h"
+	<immintrin.h>
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\simd\neon\affine.h
+	"../../common.h"
+	"../intrin.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\cam.h
+	"common.h"
+	"plane.h"
+	"clipspace/persp.h"
+	"clipspace/ortho_lh_zo.h"
+	"clipspace/persp_lh_zo.h"
+	"clipspace/view_lh_zo.h"
+	"clipspace/ortho_lh_no.h"
+	"clipspace/persp_lh_no.h"
+	"clipspace/view_lh_no.h"
+	"clipspace/ortho_rh_zo.h"
+	"clipspace/persp_rh_zo.h"
+	"clipspace/view_rh_zo.h"
+	"clipspace/ortho_rh_no.h"
+	"clipspace/persp_rh_no.h"
+	"clipspace/view_rh_no.h"
+	"clipspace/ortho_lh_zo.h"
+	"clipspace/persp_lh_zo.h"
+	"clipspace/ortho_lh_no.h"
+	"clipspace/persp_lh_no.h"
+	"clipspace/ortho_rh_zo.h"
+	"clipspace/persp_rh_zo.h"
+	"clipspace/ortho_rh_no.h"
+	"clipspace/persp_rh_no.h"
+	"clipspace/view_lh_zo.h"
+	"clipspace/view_lh_no.h"
+	"clipspace/view_rh_zo.h"
+	"clipspace/view_rh_no.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\plane.h
+	"common.h"
+	"vec3.h"
+	"vec4.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\clipspace\persp.h
+	"../common.h"
+	"../plane.h"
+	"../mat4.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\clipspace\ortho_lh_zo.h
+	"../common.h"
+	"../plane.h"
+	"../mat4.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\clipspace\persp_lh_zo.h
+	"../common.h"
+	"persp.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\clipspace\view_lh_zo.h
+	"../common.h"
+	"view_lh.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\clipspace\view_lh.h
+	"../common.h"
+	"../plane.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\clipspace\ortho_lh_no.h
+	"../common.h"
+	"../plane.h"
+	"../mat4.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\clipspace\persp_lh_no.h
+	"../common.h"
+	"persp.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\clipspace\view_lh_no.h
+	"../common.h"
+	"view_lh.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\clipspace\ortho_rh_zo.h
+	"../common.h"
+	"../plane.h"
+	"../mat4.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\clipspace\persp_rh_zo.h
+	"../common.h"
+	"persp.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\clipspace\view_rh_zo.h
+	"../common.h"
+	"view_rh.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\clipspace\view_rh.h
+	"../common.h"
+	"../plane.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\clipspace\ortho_rh_no.h
+	"../common.h"
+	"../plane.h"
+	"../mat4.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\clipspace\persp_rh_no.h
+	"../common.h"
+	"persp.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\clipspace\view_rh_no.h
+	"../common.h"
+	"view_rh.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\frustum.h
+	"common.h"
+	"plane.h"
+	"vec3.h"
+	"vec4.h"
+	"mat4.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\quat.h
+	"common.h"
+	"vec3.h"
+	"vec4.h"
+	"mat4.h"
+	"mat3.h"
+	"affine-mat.h"
+	"affine.h"
+	"simd/sse2/quat.h"
+	"simd/neon/quat.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\simd\sse2\quat.h
+	"../../common.h"
+	"../intrin.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\simd\neon\quat.h
+	"../../common.h"
+	"../intrin.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\euler.h
+	"common.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\box.h
+	"common.h"
+	"vec3.h"
+	"vec4.h"
+	"util.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\color.h
+	"common.h"
+	"vec3.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\io.h
+	"common.h"
+	<stdio.h>
+	<stdlib.h>
+	"common.h"
+	<stdio.h>
+	<stdlib.h>
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\project.h
+	"common.h"
+	"vec3.h"
+	"vec4.h"
+	"mat4.h"
+	"clipspace/project_zo.h"
+	"clipspace/project_no.h"
+	"clipspace/project_zo.h"
+	"clipspace/project_no.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\clipspace\project_zo.h
+	"../common.h"
+	"../vec3.h"
+	"../vec4.h"
+	"../mat4.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\clipspace\project_no.h
+	"../common.h"
+	"../vec3.h"
+	"../vec4.h"
+	"../mat4.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\sphere.h
+	"common.h"
+	"mat4.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\ease.h
+	"common.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\curve.h
+	"common.h"
+	"vec4.h"
+	"mat4.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\bezier.h
+	"common.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\ray.h
+	"vec3.h"
+
+1629625252 f:\c project\repos\pointless war\libs\include\cglm\affine2d.h
+	"common.h"
+	"util.h"
+	"vec2.h"
+	"mat3.h"
+
+1632650122 f:\c project\repos\pointless war\src\gl\texture.h
+	<stb_image.h>
+	<glad/glad.h>
+
+1607011814 f:\c project\repos\pointless war\libs\include\stb_image.h
+	"stb_image.h"
+	<stdio.h>
+	<stdlib.h>
+	<stdarg.h>
+	<stddef.h>
+	<stdlib.h>
+	<string.h>
+	<limits.h>
+	<math.h>
+	<stdio.h>
+	<assert.h>
+	<stdint.h>
+	<emmintrin.h>
+	<intrin.h>
+	<arm_neon.h>
+
+1631717356 f:\c project\repos\pointless war\src\gl\program.h
+	<stdio.h>
+	<stdlib.h>
+	<malloc.h>
+	<stdbool.h>
+	<string.h>
+	<glad/glad.h>
+
+1632736544 f:\c project\repos\pointless war\src\util\image.h
+	<stdint.h>
+	<assert.h>
+	<stdlib.h>
+
+1635586472 source:f:\c project\repos\pointless war\src\game.c
+	"Game.h"
+	<clist/list.h>
+	<cbitset/bitset.h>
+	<inttypes.h>
+	<cglm/cglm.h>
+	"Game/Units/Inventory.h"
+	"Game/Units/Item.h"
+	"Gui/Menu.h"
+
+1635615538 f:\c project\repos\pointless war\src\game.h
+	<windows.h>
+	"Game/Units/Item.h"
+	"Utility.h"
+	"Time.h"
+	"SDL/Window.h"
+	"GL/Program.h"
+	"GL/CameraGL.h"
+	"Game/Units/Object.h"
+	"Game/Voxels/Chunk.h"
+	"Game/Voxels/VoxelInstance.h"
+	"Gui/Menu.h"
+	"Objects.h"
+	"Items.h"
+	"Canvas.h"
+
+1632645598 f:\c project\repos\pointless war\src\game\units\item.h
+	<stdio.h>
+	<stdlib.h>
+	<string.h>
+	<stdbool.h>
+	<stdint.h>
+	<cglm/cglm.h>
+
+1635615650 f:\c project\repos\pointless war\src\utility.h
+	<glad/glad.h>
+	"main.h"
+	"Game/Units/Object.h"
+	"Game/Units/Inventory.h"
+	"SDL/Window.h"
+	"GL/Program.h"
+	"GL/CameraGL.h"
+	"Game/Voxels/Chunk.h"
+	"Game/Voxels/VoxelInstance.h"
+	"GL/VertexArrayObject.h"
+	"Time.h"
+	"Objects.h"
+	"MainPlayer.h"
+	"AsciiWorld.h"
+	"Util/Image.h"
+	"GL/Texture.h"
+	"Items.h"
+	"Gui/Menu.h"
+	"Canvas.h"
+
+1633254018 f:\c project\repos\pointless war\src\main.h
+	<stdint-gcc.h>
+
+1632556798 f:\c project\repos\pointless war\src\game\units\object.h
+	<stdio.h>
+	<stdlib.h>
+	<stdint-gcc.h>
+	<stdbool.h>
+	<assert.h>
+	<colision.h>
+	<cglm/cglm.h>
+
+1626183644 f:\c project\repos\pointless war\libs\include\colision.h
+	<stdbool.h>
+
+1631949914 f:\c project\repos\pointless war\src\game\units\inventory.h
+	<stdio.h>
+	<stdint.h>
+	<malloc.h>
+	<inttypes.h>
+	<SDL2/SDL.h>
+
+1608572888 f:\c project\repos\pointless war\libs\include\sdl2\sdl.h
+	"SDL_main.h"
+	"SDL_stdinc.h"
+	"SDL_assert.h"
+	"SDL_atomic.h"
+	"SDL_audio.h"
+	"SDL_clipboard.h"
+	"SDL_cpuinfo.h"
+	"SDL_endian.h"
+	"SDL_error.h"
+	"SDL_events.h"
+	"SDL_filesystem.h"
+	"SDL_gamecontroller.h"
+	"SDL_haptic.h"
+	"SDL_hints.h"
+	"SDL_joystick.h"
+	"SDL_loadso.h"
+	"SDL_log.h"
+	"SDL_messagebox.h"
+	"SDL_metal.h"
+	"SDL_mutex.h"
+	"SDL_power.h"
+	"SDL_render.h"
+	"SDL_rwops.h"
+	"SDL_sensor.h"
+	"SDL_shape.h"
+	"SDL_system.h"
+	"SDL_thread.h"
+	"SDL_timer.h"
+	"SDL_version.h"
+	"SDL_video.h"
+	"SDL_locale.h"
+	"SDL_misc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1610724550 f:\c project\repos\pointless war\libs\include\sdl2\sdl_main.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1608572890 f:\c project\repos\pointless war\libs\include\sdl2\sdl_stdinc.h
+	"SDL_config.h"
+	<sys/types.h>
+	<stdio.h>
+	<stdlib.h>
+	<stddef.h>
+	<stdarg.h>
+	<stdlib.h>
+	<malloc.h>
+	<stddef.h>
+	<stdarg.h>
+	<memory.h>
+	<string.h>
+	<strings.h>
+	<wchar.h>
+	<inttypes.h>
+	<stdint.h>
+	<ctype.h>
+	<math.h>
+	<float.h>
+	<alloca.h>
+	<malloc.h>
+	<malloc.h>
+	<malloc.h>
+	<stdlib.h>
+	<sal.h>
+	"begin_code.h"
+	"close_code.h"
+
+1608572890 f:\c project\repos\pointless war\libs\include\sdl2\sdl_config.h
+	"SDL_platform.h"
+	<sdkddkver.h>
+
+1608572890 f:\c project\repos\pointless war\libs\include\sdl2\sdl_platform.h
+	"AvailabilityMacros.h"
+	"TargetConditionals.h"
+	<winapifamily.h>
+	"begin_code.h"
+	"close_code.h"
+
+1608572890 f:\c project\repos\pointless war\libs\include\sdl2\begin_code.h
+
+1608572890 f:\c project\repos\pointless war\libs\include\sdl2\close_code.h
+
+1608572888 f:\c project\repos\pointless war\libs\include\sdl2\sdl_assert.h
+	"SDL_config.h"
+	"begin_code.h"
+	<signal.h>
+	"close_code.h"
+
+1608572888 f:\c project\repos\pointless war\libs\include\sdl2\sdl_atomic.h
+	"SDL_stdinc.h"
+	"SDL_platform.h"
+	"begin_code.h"
+	<sys/cpuinline.h>
+	<mbarrier.h>
+	"close_code.h"
+
+1608572888 f:\c project\repos\pointless war\libs\include\sdl2\sdl_audio.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_endian.h"
+	"SDL_mutex.h"
+	"SDL_thread.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1608572888 f:\c project\repos\pointless war\libs\include\sdl2\sdl_error.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1608572888 f:\c project\repos\pointless war\libs\include\sdl2\sdl_endian.h
+	"SDL_stdinc.h"
+	<endian.h>
+	<endian.h>
+	"begin_code.h"
+	"close_code.h"
+
+1608572888 f:\c project\repos\pointless war\libs\include\sdl2\sdl_mutex.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1608572890 f:\c project\repos\pointless war\libs\include\sdl2\sdl_thread.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_atomic.h"
+	"SDL_mutex.h"
+	"begin_code.h"
+	<process.h>
+	<process.h>
+	<stdlib.h>
+	"close_code.h"
+
+1608572890 f:\c project\repos\pointless war\libs\include\sdl2\sdl_rwops.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1608572888 f:\c project\repos\pointless war\libs\include\sdl2\sdl_clipboard.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1608572888 f:\c project\repos\pointless war\libs\include\sdl2\sdl_cpuinfo.h
+	"SDL_stdinc.h"
+	<intrin.h>
+	<intrin.h>
+	<altivec.h>
+	<arm_neon.h>
+	<armintr.h>
+	<arm_neon.h>
+	<arm64intr.h>
+	<arm64_neon.h>
+	<mm3dnow.h>
+	<immintrin.h>
+	<mmintrin.h>
+	<xmmintrin.h>
+	<emmintrin.h>
+	<pmmintrin.h>
+	"begin_code.h"
+	"close_code.h"
+
+1608572888 f:\c project\repos\pointless war\libs\include\sdl2\sdl_events.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"SDL_keyboard.h"
+	"SDL_mouse.h"
+	"SDL_joystick.h"
+	"SDL_gamecontroller.h"
+	"SDL_quit.h"
+	"SDL_gesture.h"
+	"SDL_touch.h"
+	"begin_code.h"
+	"close_code.h"
+
+1608572890 f:\c project\repos\pointless war\libs\include\sdl2\sdl_video.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_surface.h"
+	"begin_code.h"
+	"close_code.h"
+
+1608572890 f:\c project\repos\pointless war\libs\include\sdl2\sdl_pixels.h
+	"SDL_stdinc.h"
+	"SDL_endian.h"
+	"begin_code.h"
+	"close_code.h"
+
+1608572890 f:\c project\repos\pointless war\libs\include\sdl2\sdl_rect.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_pixels.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1608572890 f:\c project\repos\pointless war\libs\include\sdl2\sdl_surface.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_blendmode.h"
+	"SDL_rwops.h"
+	"begin_code.h"
+	"close_code.h"
+
+1608572888 f:\c project\repos\pointless war\libs\include\sdl2\sdl_blendmode.h
+	"begin_code.h"
+	"close_code.h"
+
+1608572888 f:\c project\repos\pointless war\libs\include\sdl2\sdl_keyboard.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_keycode.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1608572888 f:\c project\repos\pointless war\libs\include\sdl2\sdl_keycode.h
+	"SDL_stdinc.h"
+	"SDL_scancode.h"
+
+1608572890 f:\c project\repos\pointless war\libs\include\sdl2\sdl_scancode.h
+	"SDL_stdinc.h"
+
+1608572888 f:\c project\repos\pointless war\libs\include\sdl2\sdl_mouse.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1608572888 f:\c project\repos\pointless war\libs\include\sdl2\sdl_joystick.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1608572888 f:\c project\repos\pointless war\libs\include\sdl2\sdl_gamecontroller.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_rwops.h"
+	"SDL_sensor.h"
+	"SDL_joystick.h"
+	"begin_code.h"
+	"close_code.h"
+
+1608572890 f:\c project\repos\pointless war\libs\include\sdl2\sdl_sensor.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1608572890 f:\c project\repos\pointless war\libs\include\sdl2\sdl_quit.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+
+1608572888 f:\c project\repos\pointless war\libs\include\sdl2\sdl_gesture.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"SDL_touch.h"
+	"begin_code.h"
+	"close_code.h"
+
+1608572890 f:\c project\repos\pointless war\libs\include\sdl2\sdl_touch.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1608572888 f:\c project\repos\pointless war\libs\include\sdl2\sdl_filesystem.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1608572888 f:\c project\repos\pointless war\libs\include\sdl2\sdl_haptic.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"SDL_joystick.h"
+	"begin_code.h"
+	"close_code.h"
+
+1608572888 f:\c project\repos\pointless war\libs\include\sdl2\sdl_hints.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1608572888 f:\c project\repos\pointless war\libs\include\sdl2\sdl_loadso.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1608572888 f:\c project\repos\pointless war\libs\include\sdl2\sdl_log.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1608572888 f:\c project\repos\pointless war\libs\include\sdl2\sdl_messagebox.h
+	"SDL_stdinc.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1608572888 f:\c project\repos\pointless war\libs\include\sdl2\sdl_metal.h
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1608572890 f:\c project\repos\pointless war\libs\include\sdl2\sdl_power.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1608572890 f:\c project\repos\pointless war\libs\include\sdl2\sdl_render.h
+	"SDL_stdinc.h"
+	"SDL_rect.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1608572890 f:\c project\repos\pointless war\libs\include\sdl2\sdl_shape.h
+	"SDL_stdinc.h"
+	"SDL_pixels.h"
+	"SDL_rect.h"
+	"SDL_surface.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1608572890 f:\c project\repos\pointless war\libs\include\sdl2\sdl_system.h
+	"SDL_stdinc.h"
+	"SDL_keyboard.h"
+	"SDL_render.h"
+	"SDL_video.h"
+	"begin_code.h"
+	"close_code.h"
+
+1608572890 f:\c project\repos\pointless war\libs\include\sdl2\sdl_timer.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1608572890 f:\c project\repos\pointless war\libs\include\sdl2\sdl_version.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1608572888 f:\c project\repos\pointless war\libs\include\sdl2\sdl_locale.h
+	"SDL_stdinc.h"
+	"SDL_error.h"
+	"begin_code.h"
+	"close_code.h"
+
+1608572888 f:\c project\repos\pointless war\libs\include\sdl2\sdl_misc.h
+	"SDL_stdinc.h"
+	"begin_code.h"
+	"close_code.h"
+
+1634906922 f:\c project\repos\pointless war\src\sdl\window.h
+	<stdlib.h>
+	<malloc.h>
+	<SDL2/SDL.h>
+	<stdbool.h>
+	<glad/glad.h>
+
+1634122516 f:\c project\repos\pointless war\src\gl\cameragl.h
+	<SDL2/SDL.h>
+	<stdint-gcc.h>
+	<cglm/cglm.h>
+	"Program.h"
+
+1633146034 f:\c project\repos\pointless war\src\time.h
+	<stdint-gcc.h>
+	<stdbool.h>
+	<SDL2/SDL_timer.h>
+
+1633145982 f:\c project\repos\pointless war\src\objects.h
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	<string.h>
+	<assert.h>
+	<clist/list.h>
+	<cvector/vector.h>
+	"Game/Voxels/Voxel.h"
+	"Game/Units/Object.h"
+	"MainPlayer.h"
+
+1634124156 f:\c project\repos\pointless war\src\mainplayer.h
+	"Game/Units/Object.h"
+	"GL/CameraGL.h"
+	"SDL/Window.h"
+	"main.h"
+	"AsciiWorld.h"
+
+1633852340 f:\c project\repos\pointless war\src\items.h
+	<stdio.h>
+	<stdlib.h>
+	<stdint.h>
+	<cvector/vector.h>
+	"Game/Units/Item.h"
+	"Util/Image.h"
+	"GL/Texture.h"
+
+1635614604 f:\c project\repos\pointless war\src\gui\menu.h
+	<stdlib.h>
+	<stdio.h>
+	<cvector/vector.h>
+	"Button.h"
+	"../GL/Program.h"
+
+1635612472 f:\c project\repos\pointless war\src\gui\button.h
+	<string.h>
+	<cglm/cglm.h>
+	<SDL2/SDL.h>
+	<glad/glad.h>
+	"../GL/Texture.h"
+	"../GL/VertexArrayObject.h"
+
+1631949914 source:f:\c project\repos\pointless war\src\game\units\inventory.c
+	"Inventory.h"
+
+1632645562 source:f:\c project\repos\pointless war\src\game\units\item.c
+	"Item.h"
+
+1632556798 source:f:\c project\repos\pointless war\src\game\units\object.c
+	"Object.h"
+
+1631196712 source:f:\c project\repos\pointless war\src\game\voxels\chunk.c
+	"Chunk.h"
+
+1631356270 source:f:\c project\repos\pointless war\src\game\voxels\voxelinstance.c
+	"VoxelInstance.h"
+
+1634122606 source:f:\c project\repos\pointless war\src\gl\cameragl.c
+	"CameraGL.h"
+
+1631785972 source:f:\c project\repos\pointless war\src\gl\program.c
+	"Program.h"
+	<assert.h>
+
+1632650122 source:f:\c project\repos\pointless war\src\gl\texture.c
+	"Texture.h"
+
+1635246010 source:f:\c project\repos\pointless war\src\gl\vertexarrayobject.c
+	<glad\glad.h>
+	"VertexArrayObject.h"
+
+1635612456 source:f:\c project\repos\pointless war\src\gui\button.c
+	"Button.h"
+	"../Util/Image.h"
+	<stb_image.h>
+
+1635614604 source:f:\c project\repos\pointless war\src\gui\menu.c
+	"Menu.h"
+
+1633852346 source:f:\c project\repos\pointless war\src\items.c
+	"Items.h"
+
+1635058980 source:f:\c project\repos\pointless war\src\main.c
+	<stdio.h>
+	<stdbool.h>
+	<stdlib.h>
+	<time.h>
+	<SDL2/SDL.h>
+	<windows.h>
+	<glad/glad.h>
+	<GL/glu.h>
+	"main.h"
+	"Utility.h"
+	"Time.h"
+	"SDL/Window.h"
+	"GL/Program.h"
+	"GL/CameraGL.h"
+	"Game/Units/Inventory.h"
+	"Game/Voxels/Chunk.h"
+	"Game/Voxels/VoxelInstance.h"
+	"Game.h"
+
+1634124178 source:f:\c project\repos\pointless war\src\mainplayer.c
+	"MainPlayer.h"
+	"Game/Voxels/Voxel.h"
+
+1633145982 source:f:\c project\repos\pointless war\src\objects.c
+	"Objects.h"
+	"Game/Voxels/Voxel.h"
+	"main.h"
+
+1634906922 source:f:\c project\repos\pointless war\src\sdl\window.c
+	"Window.h"
+
+1630254324 source:f:\c project\repos\pointless war\src\time.c
+	"Time.h"
+
+1632738548 source:f:\c project\repos\pointless war\src\util\image.c
+	"Image.h"
+	<stb_image.h>
+	<stb_image_resize.h>
+	<stb_image_write.h>
+
+1607011814 f:\c project\repos\pointless war\libs\include\stb_image_resize.h
+	"stb_image_resize.h"
+	<stdint.h>
+	<assert.h>
+	<string.h>
+	<math.h>
+	<stdlib.h>
+
+1607011814 f:\c project\repos\pointless war\libs\include\stb_image_write.h
+	<stdlib.h>
+	<stdio.h>
+	<stdarg.h>
+	<stdlib.h>
+	<string.h>
+	<math.h>
+	<assert.h>
+
+1635615628 source:f:\c project\repos\pointless war\src\utility.c
+	"Utility.h"
+

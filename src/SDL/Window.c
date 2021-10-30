@@ -28,6 +28,11 @@ static void WindowGLsetWindowInputFocus(WindowGL* const win)
     SDL_SetWindowInputFocus(win->window);
 }
 
+static void WindowGLGetSize(WindowGL* const win, int *w, int *h)
+{
+    SDL_GetWindowSize(win->window, w, h);
+}
+
 static bool WindowGLisFocused(WindowGL* const win)
 {
     return SDL_GetGrabbedWindow != win->window;
@@ -38,6 +43,7 @@ WindowGLManager windowGLManagerInit()
     struct WindowGLManager manager;
     manager.init = &WindowGLinit;
     manager.delete = &WindowGLdelete;
+    manager.getSize = &WindowGLGetSize;
     manager.swap = &WindowGLswap;
     manager.isFocused = &WindowGLisFocused;
     manager.setWindowInputFocus = &WindowGLsetWindowInputFocus;

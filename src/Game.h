@@ -12,20 +12,21 @@
 #include "Game/Units/Object.h"
 #include "Game/Voxels/Chunk.h"
 #include "Game/Voxels/VoxelInstance.h"
+#include "Gui/Menu.h"
 #include "Objects.h"
 #include "Items.h"
+#include "Canvas.h"
 
 struct Game
 {
     struct MainPlayer player;
     struct Time ltime;
-    struct Program shader;
-    struct VertexArrayObject voxel;
+    struct Canvas gameCanvas;
 };
 
-void gameInit(struct Game* const game, struct GlobalManager* const manager);
-void gameLoop(struct Game* const game, struct WindowGL* const win, struct GlobalManager* const manager);
-void gameDelete(struct Game* const game, struct GlobalManager* const manager);
+void gameInit(struct Game* game, struct GlobalManager* manager);
+void gameLoop(struct Game* game, struct WindowGL* const win, struct GlobalManager* manager);
+void gameDelete(struct Game* game, struct GlobalManager* manager);
 
 static inline Object* createObject(float x, float y, float z, float speed, float w, float h, float d)
 {

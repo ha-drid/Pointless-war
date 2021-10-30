@@ -8,19 +8,6 @@
 #define gradus_s(x) \
     ((float)((180.0f / M_PI) * x))
 
-static void cameraPerspective(struct CameraGL* const camera, float radian, float aspect, float nearZ, float farZ)
-{
-    glm_perspective(radian, aspect, nearZ, farZ, camera->projection);
-}
-
-static void cameraOrtho(struct CameraGL* const camera,
-                  float left,    float right,
-                  float bottom,  float top,
-                  float nearZ,   float farZ)
-{
-    glm_ortho(left, right, bottom, top, nearZ, farZ, camera->projection);
-}
-
 static void cameraSetAngle(struct CameraGL* const camera, float xAngle, float yAngle)
 {
     camera->xAngle = xAngle;
@@ -39,7 +26,7 @@ static void cameraGlInit(struct CameraGL* const camera, vec3 pos, float xAngle, 
 //    cameraSetVelocity(camera, (float[]){ 0.0f, 0.0f, 0.0f });
     camera->speed = speed;
 
-    cameraOrtho(camera, -1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f);
+ //   cameraOrtho(camera, -1.0f, 1.0f, -1.0f, 1.0f, -1.0f, 1.0f);
 }
 
 static void cameraRotate(struct CameraGL* const camera, float xAngleGradus, float yAngleGradus)
@@ -58,7 +45,7 @@ static void cameraRotate(struct CameraGL* const camera, float xAngleGradus, floa
     if (camera->yAngle < radians_s(-89.0f))
         camera->yAngle = radians_s(-89.0f);
 }
-
+/*
 static void cameraGLApply(struct CameraGL* const camera,
                   struct Program* const program,
                   const char* u_ProjectionView,
@@ -90,7 +77,7 @@ static void cameraGLApply(struct CameraGL* const camera,
     glm_mat4_mul(camera->projection, camera->view, mul);
 
     manager->setMat4fv(program, u_ProjectionView, 1, GL_FALSE, mul);
-}
+}*/
 
 static void cameraMove(struct CameraGL* camera, bool x, bool y, bool z,
                          uint8_t forwardKey, uint8_t backKey, uint8_t leftKey, uint8_t rightKey)
@@ -142,13 +129,13 @@ struct CameraGLManager cameraGlManagerInit()
 {
     struct CameraGLManager manager;
 
-    manager.apply = &cameraGLApply;
-    manager.perspective = &cameraPerspective;
-    manager.ortho = &cameraOrtho;
+//    manager.apply = &cameraGLApply;
+   // manager.perspective = &cameraPerspective;
+    //manager.ortho = &cameraOrtho;
     manager.init = &cameraGlInit;
     manager.rotate = &cameraRotate;
     manager.setAngle = &cameraSetAngle;
-    manager.apply = &cameraGLApply;
+ //   manager.apply = &cameraGLApply;
     manager.move = &cameraMove;
     manager.setPosition = &cameraSetPosition;
     manager.update = &cameraUpdate;

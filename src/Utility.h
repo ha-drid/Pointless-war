@@ -14,14 +14,14 @@
 #include "Game/Voxels/VoxelInstance.h"
 #include "GL/VertexArrayObject.h"
 #include "Time.h"
-#include "GL/VertexArray.h"
 #include "Objects.h"
 #include "MainPlayer.h"
 #include "AsciiWorld.h"
 #include "Util/Image.h"
 #include "GL/Texture.h"
-#include "Screen.h"
 #include "Items.h"
+#include "Gui/Menu.h"
+#include "Canvas.h"
 
 typedef struct GlobalManager
 {
@@ -32,16 +32,15 @@ typedef struct GlobalManager
     struct VoxelInstanceManager voxelInstance;
     struct ObjectManager object;
     struct TimeManager time;
-//    struct InventoryManager inventory;
     struct VertexArrayObjectManager vao;
-    struct VertexArrayManager vertexArray;
     struct ObjectsManager objects;
     struct MainPlayerManager mainPlayer;
-    struct ScreenManager screen;
     struct AsciiWorldManager asciiWorld;
     struct ImageManager image;
     struct TextureManager texture;
-    struct InventoryIconsManager inventoryIcon;
+    struct CanvasManager canvas;
+    struct ButtonManager button;
+    struct MenuManager menu;
 } GlobalManager;
 
 struct GlobalManager globalManagerInit();

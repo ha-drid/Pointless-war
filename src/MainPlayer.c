@@ -75,10 +75,14 @@ static void mainPlayerUpdate(MainPlayer* player, float time, AsciiWorld* const w
     velocity[0] = velocity[2] = 0.0f;
 }
 
-static void mainPlayerApply(struct MainPlayer* const player,
-                  struct Program* const program,
-                  const char* u_ProjectionView,
-                  struct ProgramManager* const manager)
+void mainPlayerGetDirection(MainPlayer* player, vec3 dir)
+{
+    dir[0] = cos(player->camera.yAngle) * sin(player->camera.xAngle);
+    dir[1] = sin(player->camera.yAngle);
+    dir[2] = cos(player->camera.yAngle) * cos(player->camera.xAngle);
+}
+
+void mainPlayerGetView(MainPlayer* player, vec3 pos, vec3 dir, vec3 up)
 {
     CameraGL* const camera = &(player->camera);
     vec3 direction = {
@@ -93,24 +97,14 @@ static void mainPlayerApply(struct MainPlayer* const player,
 		cos(camera->xAngle - glm_rad(90.0f))
 	};
 
-	vec3 up;
-	vec3 position;
 
 	glm_vec3_cross(right, direction, up);
-	position[0] = camera->position[0] + (player->size[0] / 2.0f);
-	position[1] = camera->position[1] + player->size[1];
-	position[2] = camera->position[2] + (player->size[2] / 2.0f);
-	glm_vec3_add(position, direction, direction);
 
-    glm_lookat( position,
-               direction,
-               up,
-               camera->view);
+	pos[0] = camera->position[0] + (player->size[0] / 2.0f);
+	pos[1] = camera->position[1] + player->size[1];
+	pos[2] = camera->position[2] + (player->size[2] / 2.0f);
+	glm_vec3_add(pos, direction, dir);
 
-    mat4 mul;
-    glm_mat4_mul(camera->projection, camera->view, mul);
-
-    manager->setMat4fv(program, u_ProjectionView, 1, GL_FALSE, mul);
 };
 
 MainPlayerManager mainPlayerManagerInit()
@@ -118,9 +112,10 @@ MainPlayerManager mainPlayerManagerInit()
     MainPlayerManager manager;
     manager.init = &mainPlayerInit;
     manager.control = &mainPlayerControl;
-    manager.perspective = &mainPlayerPerspective;
     manager.update = &mainPlayerUpdate;
     manager.vertMove = &mainPlayerVertMove;
-    manager.apply = &mainPlayerApply;
+    manager.getDirection = &mainPlayerGetDirection;
+    manager.getView = &mainPlayerGetView;
+
     return manager;
 }

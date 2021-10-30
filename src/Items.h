@@ -8,6 +8,7 @@
 
 #include "Game/Units/Item.h"
 #include "Util/Image.h"
+#include "GL/Texture.h"
 
 typedef enum {
     ItemEmptyEnum = 0,
@@ -64,19 +65,5 @@ static inline void itemGetSpeed(void* const value, float** const speed) {
     (*speed) = &(ItemsSpeed[i->iD]);
 }
 
-typedef struct InventoryIcons
-{
-    vector(Image) icons;
-    ImageManager imageManager;
-} InventoryIcons;
-
-typedef struct InventoryIconsManager
-{
-    void (*init)(InventoryIcons* const dest);
-    void (*addIcon)(InventoryIcons* const dest, const char* path);
-    void (*delete)(InventoryIcons* const dest);
-} InventoryIconsManager;
-
-InventoryIconsManager inventoryIconsManagerInit();
 
 #endif // ITEMS_H_INCLUDED

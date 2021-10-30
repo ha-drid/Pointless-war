@@ -13,7 +13,7 @@
 				<Option compiler="gcc" />
 				<Option use_console_runner="0" />
 				<Compiler>
-					<Add option="-std=c90" />
+					<Add option="-std=c17" />
 					<Add option="-g" />
 				</Compiler>
 			</Target>
@@ -33,31 +33,267 @@
 		<Compiler>
 			<Add option="-Wall" />
 			<Add option="-std=c++20" />
-			<Add option="-std=c17" />
-			<Add option="-m64" />
-			<Add directory="F:/libs/SDL2 mingw/x86_64-w64-mingw32/include" />
-			<Add directory="F:/libs/Glad/include" />
+			<Add option="-std=c11" />
 			<Add directory="libs/include" />
 		</Compiler>
 		<Linker>
-			<Add option="-m64" />
 			<Add library="mingw32" />
 			<Add library="SDL2main" />
-			<Add library="SDL2.dll" />
 			<Add library="user32" />
 			<Add library="gdi32" />
 			<Add library="winmm" />
 			<Add library="dxguid" />
 			<Add library="opengl32" />
 			<Add library="glu32" />
-			<Add directory="F:/libs/SDL2 mingw/x86_64-w64-mingw32/lib" />
-			<Add directory="F:/libs/Glad/src" />
+			<Add library="c_bitset" />
+			<Add library="c_list" />
+			<Add library="glad" />
+			<Add library="SDL2" />
+			<Add library="SDL2.dll" />
+			<Add library="libcglm" />
+			<Add directory="F:/c project/repos/pointless war/libs/lib" />
 		</Linker>
 		<ExtraCommands>
 			<Add after="XCOPY $(#sdl2)\bin\*.dll $(TARGET_OUTPUT_DIR) /D /Y" />
 		</ExtraCommands>
 		<Unit filename="libs/include/KHR/khrplatform.h" />
+		<Unit filename="libs/include/SDL2/SDL.h" />
+		<Unit filename="libs/include/SDL2/SDL_assert.h" />
+		<Unit filename="libs/include/SDL2/SDL_atomic.h" />
+		<Unit filename="libs/include/SDL2/SDL_audio.h" />
+		<Unit filename="libs/include/SDL2/SDL_bits.h" />
+		<Unit filename="libs/include/SDL2/SDL_blendmode.h" />
+		<Unit filename="libs/include/SDL2/SDL_clipboard.h" />
+		<Unit filename="libs/include/SDL2/SDL_config.h" />
+		<Unit filename="libs/include/SDL2/SDL_cpuinfo.h" />
+		<Unit filename="libs/include/SDL2/SDL_egl.h" />
+		<Unit filename="libs/include/SDL2/SDL_endian.h" />
+		<Unit filename="libs/include/SDL2/SDL_error.h" />
+		<Unit filename="libs/include/SDL2/SDL_events.h" />
+		<Unit filename="libs/include/SDL2/SDL_filesystem.h" />
+		<Unit filename="libs/include/SDL2/SDL_gamecontroller.h" />
+		<Unit filename="libs/include/SDL2/SDL_gesture.h" />
+		<Unit filename="libs/include/SDL2/SDL_haptic.h" />
+		<Unit filename="libs/include/SDL2/SDL_hints.h" />
+		<Unit filename="libs/include/SDL2/SDL_joystick.h" />
+		<Unit filename="libs/include/SDL2/SDL_keyboard.h" />
+		<Unit filename="libs/include/SDL2/SDL_keycode.h" />
+		<Unit filename="libs/include/SDL2/SDL_loadso.h" />
+		<Unit filename="libs/include/SDL2/SDL_locale.h" />
+		<Unit filename="libs/include/SDL2/SDL_log.h" />
+		<Unit filename="libs/include/SDL2/SDL_main.h" />
+		<Unit filename="libs/include/SDL2/SDL_messagebox.h" />
+		<Unit filename="libs/include/SDL2/SDL_metal.h" />
+		<Unit filename="libs/include/SDL2/SDL_misc.h" />
+		<Unit filename="libs/include/SDL2/SDL_mouse.h" />
+		<Unit filename="libs/include/SDL2/SDL_mutex.h" />
+		<Unit filename="libs/include/SDL2/SDL_name.h" />
+		<Unit filename="libs/include/SDL2/SDL_opengl.h" />
+		<Unit filename="libs/include/SDL2/SDL_opengl_glext.h" />
+		<Unit filename="libs/include/SDL2/SDL_opengles.h" />
+		<Unit filename="libs/include/SDL2/SDL_opengles2.h" />
+		<Unit filename="libs/include/SDL2/SDL_opengles2_gl2.h" />
+		<Unit filename="libs/include/SDL2/SDL_opengles2_gl2ext.h" />
+		<Unit filename="libs/include/SDL2/SDL_opengles2_gl2platform.h" />
+		<Unit filename="libs/include/SDL2/SDL_opengles2_khrplatform.h" />
+		<Unit filename="libs/include/SDL2/SDL_pixels.h" />
+		<Unit filename="libs/include/SDL2/SDL_platform.h" />
+		<Unit filename="libs/include/SDL2/SDL_power.h" />
+		<Unit filename="libs/include/SDL2/SDL_quit.h" />
+		<Unit filename="libs/include/SDL2/SDL_rect.h" />
+		<Unit filename="libs/include/SDL2/SDL_render.h" />
+		<Unit filename="libs/include/SDL2/SDL_revision.h" />
+		<Unit filename="libs/include/SDL2/SDL_rwops.h" />
+		<Unit filename="libs/include/SDL2/SDL_scancode.h" />
+		<Unit filename="libs/include/SDL2/SDL_sensor.h" />
+		<Unit filename="libs/include/SDL2/SDL_shape.h" />
+		<Unit filename="libs/include/SDL2/SDL_stdinc.h" />
+		<Unit filename="libs/include/SDL2/SDL_surface.h" />
+		<Unit filename="libs/include/SDL2/SDL_system.h" />
+		<Unit filename="libs/include/SDL2/SDL_syswm.h" />
+		<Unit filename="libs/include/SDL2/SDL_test.h" />
+		<Unit filename="libs/include/SDL2/SDL_test_assert.h" />
+		<Unit filename="libs/include/SDL2/SDL_test_common.h" />
+		<Unit filename="libs/include/SDL2/SDL_test_compare.h" />
+		<Unit filename="libs/include/SDL2/SDL_test_crc32.h" />
+		<Unit filename="libs/include/SDL2/SDL_test_font.h" />
+		<Unit filename="libs/include/SDL2/SDL_test_fuzzer.h" />
+		<Unit filename="libs/include/SDL2/SDL_test_harness.h" />
+		<Unit filename="libs/include/SDL2/SDL_test_images.h" />
+		<Unit filename="libs/include/SDL2/SDL_test_log.h" />
+		<Unit filename="libs/include/SDL2/SDL_test_md5.h" />
+		<Unit filename="libs/include/SDL2/SDL_test_memory.h" />
+		<Unit filename="libs/include/SDL2/SDL_test_random.h" />
+		<Unit filename="libs/include/SDL2/SDL_thread.h" />
+		<Unit filename="libs/include/SDL2/SDL_timer.h" />
+		<Unit filename="libs/include/SDL2/SDL_touch.h" />
+		<Unit filename="libs/include/SDL2/SDL_types.h" />
+		<Unit filename="libs/include/SDL2/SDL_version.h" />
+		<Unit filename="libs/include/SDL2/SDL_video.h" />
+		<Unit filename="libs/include/SDL2/SDL_vulkan.h" />
+		<Unit filename="libs/include/SDL2/begin_code.h" />
+		<Unit filename="libs/include/SDL2/close_code.h" />
+		<Unit filename="libs/include/cbitset/bitset.h" />
+		<Unit filename="libs/include/cbitset/portability.h" />
+		<Unit filename="libs/include/cglm/affine-mat.h" />
+		<Unit filename="libs/include/cglm/affine.h" />
+		<Unit filename="libs/include/cglm/affine2d.h" />
+		<Unit filename="libs/include/cglm/applesimd.h" />
+		<Unit filename="libs/include/cglm/bezier.h" />
+		<Unit filename="libs/include/cglm/box.h" />
+		<Unit filename="libs/include/cglm/call.h" />
+		<Unit filename="libs/include/cglm/call/affine.h" />
+		<Unit filename="libs/include/cglm/call/affine2d.h" />
+		<Unit filename="libs/include/cglm/call/bezier.h" />
+		<Unit filename="libs/include/cglm/call/box.h" />
+		<Unit filename="libs/include/cglm/call/cam.h" />
+		<Unit filename="libs/include/cglm/call/clipspace/ortho_lh_no.h" />
+		<Unit filename="libs/include/cglm/call/clipspace/ortho_lh_zo.h" />
+		<Unit filename="libs/include/cglm/call/clipspace/ortho_rh_no.h" />
+		<Unit filename="libs/include/cglm/call/clipspace/ortho_rh_zo.h" />
+		<Unit filename="libs/include/cglm/call/clipspace/persp_lh_no.h" />
+		<Unit filename="libs/include/cglm/call/clipspace/persp_lh_zo.h" />
+		<Unit filename="libs/include/cglm/call/clipspace/persp_rh_no.h" />
+		<Unit filename="libs/include/cglm/call/clipspace/persp_rh_zo.h" />
+		<Unit filename="libs/include/cglm/call/clipspace/project_no.h" />
+		<Unit filename="libs/include/cglm/call/clipspace/project_zo.h" />
+		<Unit filename="libs/include/cglm/call/clipspace/view_lh_no.h" />
+		<Unit filename="libs/include/cglm/call/clipspace/view_lh_zo.h" />
+		<Unit filename="libs/include/cglm/call/clipspace/view_rh_no.h" />
+		<Unit filename="libs/include/cglm/call/clipspace/view_rh_zo.h" />
+		<Unit filename="libs/include/cglm/call/curve.h" />
+		<Unit filename="libs/include/cglm/call/ease.h" />
+		<Unit filename="libs/include/cglm/call/euler.h" />
+		<Unit filename="libs/include/cglm/call/frustum.h" />
+		<Unit filename="libs/include/cglm/call/io.h" />
+		<Unit filename="libs/include/cglm/call/mat2.h" />
+		<Unit filename="libs/include/cglm/call/mat3.h" />
+		<Unit filename="libs/include/cglm/call/mat4.h" />
+		<Unit filename="libs/include/cglm/call/plane.h" />
+		<Unit filename="libs/include/cglm/call/project.h" />
+		<Unit filename="libs/include/cglm/call/quat.h" />
+		<Unit filename="libs/include/cglm/call/ray.h" />
+		<Unit filename="libs/include/cglm/call/sphere.h" />
+		<Unit filename="libs/include/cglm/call/vec2.h" />
+		<Unit filename="libs/include/cglm/call/vec3.h" />
+		<Unit filename="libs/include/cglm/call/vec4.h" />
+		<Unit filename="libs/include/cglm/cam.h" />
+		<Unit filename="libs/include/cglm/cglm.h" />
+		<Unit filename="libs/include/cglm/clipspace/ortho_lh_no.h" />
+		<Unit filename="libs/include/cglm/clipspace/ortho_lh_zo.h" />
+		<Unit filename="libs/include/cglm/clipspace/ortho_rh_no.h" />
+		<Unit filename="libs/include/cglm/clipspace/ortho_rh_zo.h" />
+		<Unit filename="libs/include/cglm/clipspace/persp.h" />
+		<Unit filename="libs/include/cglm/clipspace/persp_lh_no.h" />
+		<Unit filename="libs/include/cglm/clipspace/persp_lh_zo.h" />
+		<Unit filename="libs/include/cglm/clipspace/persp_rh_no.h" />
+		<Unit filename="libs/include/cglm/clipspace/persp_rh_zo.h" />
+		<Unit filename="libs/include/cglm/clipspace/project_no.h" />
+		<Unit filename="libs/include/cglm/clipspace/project_zo.h" />
+		<Unit filename="libs/include/cglm/clipspace/view_lh.h" />
+		<Unit filename="libs/include/cglm/clipspace/view_lh_no.h" />
+		<Unit filename="libs/include/cglm/clipspace/view_lh_zo.h" />
+		<Unit filename="libs/include/cglm/clipspace/view_rh.h" />
+		<Unit filename="libs/include/cglm/clipspace/view_rh_no.h" />
+		<Unit filename="libs/include/cglm/clipspace/view_rh_zo.h" />
+		<Unit filename="libs/include/cglm/color.h" />
+		<Unit filename="libs/include/cglm/common.h" />
+		<Unit filename="libs/include/cglm/curve.h" />
+		<Unit filename="libs/include/cglm/ease.h" />
+		<Unit filename="libs/include/cglm/euler.h" />
+		<Unit filename="libs/include/cglm/frustum.h" />
+		<Unit filename="libs/include/cglm/io.h" />
+		<Unit filename="libs/include/cglm/mat2.h" />
+		<Unit filename="libs/include/cglm/mat3.h" />
+		<Unit filename="libs/include/cglm/mat4.h" />
+		<Unit filename="libs/include/cglm/plane.h" />
+		<Unit filename="libs/include/cglm/project.h" />
+		<Unit filename="libs/include/cglm/quat.h" />
+		<Unit filename="libs/include/cglm/ray.h" />
+		<Unit filename="libs/include/cglm/simd/arm.h" />
+		<Unit filename="libs/include/cglm/simd/avx/affine.h" />
+		<Unit filename="libs/include/cglm/simd/avx/mat4.h" />
+		<Unit filename="libs/include/cglm/simd/intrin.h" />
+		<Unit filename="libs/include/cglm/simd/neon/affine.h" />
+		<Unit filename="libs/include/cglm/simd/neon/mat2.h" />
+		<Unit filename="libs/include/cglm/simd/neon/mat4.h" />
+		<Unit filename="libs/include/cglm/simd/neon/quat.h" />
+		<Unit filename="libs/include/cglm/simd/sse2/affine.h" />
+		<Unit filename="libs/include/cglm/simd/sse2/mat2.h" />
+		<Unit filename="libs/include/cglm/simd/sse2/mat3.h" />
+		<Unit filename="libs/include/cglm/simd/sse2/mat4.h" />
+		<Unit filename="libs/include/cglm/simd/sse2/quat.h" />
+		<Unit filename="libs/include/cglm/simd/x86.h" />
+		<Unit filename="libs/include/cglm/sphere.h" />
+		<Unit filename="libs/include/cglm/struct.h" />
+		<Unit filename="libs/include/cglm/struct/affine.h" />
+		<Unit filename="libs/include/cglm/struct/affine2d.h" />
+		<Unit filename="libs/include/cglm/struct/box.h" />
+		<Unit filename="libs/include/cglm/struct/cam.h" />
+		<Unit filename="libs/include/cglm/struct/clipspace/ortho_lh_no.h" />
+		<Unit filename="libs/include/cglm/struct/clipspace/ortho_lh_zo.h" />
+		<Unit filename="libs/include/cglm/struct/clipspace/ortho_rh_no.h" />
+		<Unit filename="libs/include/cglm/struct/clipspace/ortho_rh_zo.h" />
+		<Unit filename="libs/include/cglm/struct/clipspace/persp_lh_no.h" />
+		<Unit filename="libs/include/cglm/struct/clipspace/persp_lh_zo.h" />
+		<Unit filename="libs/include/cglm/struct/clipspace/persp_rh_no.h" />
+		<Unit filename="libs/include/cglm/struct/clipspace/persp_rh_zo.h" />
+		<Unit filename="libs/include/cglm/struct/clipspace/view_lh_no.h" />
+		<Unit filename="libs/include/cglm/struct/clipspace/view_lh_zo.h" />
+		<Unit filename="libs/include/cglm/struct/clipspace/view_rh_no.h" />
+		<Unit filename="libs/include/cglm/struct/clipspace/view_rh_zo.h" />
+		<Unit filename="libs/include/cglm/struct/color.h" />
+		<Unit filename="libs/include/cglm/struct/curve.h" />
+		<Unit filename="libs/include/cglm/struct/euler.h" />
+		<Unit filename="libs/include/cglm/struct/frustum.h" />
+		<Unit filename="libs/include/cglm/struct/io.h" />
+		<Unit filename="libs/include/cglm/struct/mat2.h" />
+		<Unit filename="libs/include/cglm/struct/mat3.h" />
+		<Unit filename="libs/include/cglm/struct/mat4.h" />
+		<Unit filename="libs/include/cglm/struct/plane.h" />
+		<Unit filename="libs/include/cglm/struct/project.h" />
+		<Unit filename="libs/include/cglm/struct/quat.h" />
+		<Unit filename="libs/include/cglm/struct/sphere.h" />
+		<Unit filename="libs/include/cglm/struct/vec2-ext.h" />
+		<Unit filename="libs/include/cglm/struct/vec2.h" />
+		<Unit filename="libs/include/cglm/struct/vec3-ext.h" />
+		<Unit filename="libs/include/cglm/struct/vec3.h" />
+		<Unit filename="libs/include/cglm/struct/vec4-ext.h" />
+		<Unit filename="libs/include/cglm/struct/vec4.h" />
+		<Unit filename="libs/include/cglm/types-struct.h" />
+		<Unit filename="libs/include/cglm/types.h" />
+		<Unit filename="libs/include/cglm/util.h" />
+		<Unit filename="libs/include/cglm/vec2-ext.h" />
+		<Unit filename="libs/include/cglm/vec2.h" />
+		<Unit filename="libs/include/cglm/vec3-ext.h" />
+		<Unit filename="libs/include/cglm/vec3.h" />
+		<Unit filename="libs/include/cglm/vec4-ext.h" />
+		<Unit filename="libs/include/cglm/vec4.h" />
+		<Unit filename="libs/include/cglm/version.h" />
+		<Unit filename="libs/include/clist/list.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="libs/include/clist/list.h" />
+		<Unit filename="libs/include/clist/list_iterator.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="libs/include/clist/list_node.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="libs/include/colision.h" />
+		<Unit filename="libs/include/cvector/vector.h" />
 		<Unit filename="libs/include/glad/glad.h" />
+		<Unit filename="libs/include/stb_image.h" />
+		<Unit filename="libs/include/stb_image_resize.h" />
+		<Unit filename="libs/include/stb_image_write.h" />
+		<Unit filename="src/AsciiWorld.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/AsciiWorld.h" />
+		<Unit filename="src/Canvas.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/Canvas.h" />
 		<Unit filename="src/GL/CameraGL.c">
 			<Option compilerVar="CC" />
 		</Unit>
@@ -66,66 +302,75 @@
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src/GL/Program.h" />
-		<Unit filename="src/GL/Render.c">
+		<Unit filename="src/GL/Texture.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="src/GL/Render.h" />
+		<Unit filename="src/GL/Texture.h" />
+		<Unit filename="src/GL/VertexArrayObject.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/GL/VertexArrayObject.h" />
 		<Unit filename="src/Game.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src/Game.h" />
-		<Unit filename="src/Game/VoxelWorld.c">
+		<Unit filename="src/Game/Units/Inventory.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="src/Game/VoxelWorld.h" />
+		<Unit filename="src/Game/Units/Inventory.h" />
+		<Unit filename="src/Game/Units/Item.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/Game/Units/Item.h" />
+		<Unit filename="src/Game/Units/Object.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/Game/Units/Object.h" />
 		<Unit filename="src/Game/Voxels/Chunk.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src/Game/Voxels/Chunk.h" />
-		<Unit filename="src/Game/Voxels/Chunks.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="src/Game/Voxels/Chunks.h" />
 		<Unit filename="src/Game/Voxels/Voxel.h" />
 		<Unit filename="src/Game/Voxels/VoxelInstance.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src/Game/Voxels/VoxelInstance.h" />
-		<Unit filename="src/MVP.c">
+		<Unit filename="src/Gui/Button.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="src/MVP.h" />
+		<Unit filename="src/Gui/Button.h" />
+		<Unit filename="src/Gui/Menu.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/Gui/Menu.h" />
+		<Unit filename="src/Items.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/Items.h" />
+		<Unit filename="src/MainPlayer.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/MainPlayer.h" />
+		<Unit filename="src/Objects.c">
+			<Option compilerVar="CC" />
+		</Unit>
+		<Unit filename="src/Objects.h" />
 		<Unit filename="src/SDL/Window.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src/SDL/Window.h" />
-		<Unit filename="src/Util/Model3D.c">
+		<Unit filename="src/Time.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="src/Util/Model3D.h" />
-		<Unit filename="src/Util/dynamic_array.c">
+		<Unit filename="src/Time.h" />
+		<Unit filename="src/Util/Image.c">
 			<Option compilerVar="CC" />
 		</Unit>
-		<Unit filename="src/Util/dynamic_array.h" />
-		<Unit filename="src/Util/matrix.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="src/Util/matrix.h" />
-		<Unit filename="src/Util/vec3.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="src/Util/vec3.h" />
+		<Unit filename="src/Util/Image.h" />
 		<Unit filename="src/Utility.c">
 			<Option compilerVar="CC" />
 		</Unit>
 		<Unit filename="src/Utility.h" />
-		<Unit filename="src/World.c">
-			<Option compilerVar="CC" />
-		</Unit>
-		<Unit filename="src/World.h" />
-		<Unit filename="src/glad.c">
-			<Option compilerVar="CC" />
-		</Unit>
 		<Unit filename="src/main.c">
 			<Option compilerVar="CC" />
 		</Unit>

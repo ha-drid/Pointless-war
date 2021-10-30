@@ -29,6 +29,7 @@ typedef struct VertexArrayObjectManager
 {
     void (*init)(VertexArrayObject* const vao);
     void (*bind)(VertexArrayObject* const vao);
+    void (*rebind)();
     void (*addVertexBufferObject)(VertexArrayObject* const vao, uint32_t vertexInPoint, size_t arraySize, float* array);
     void (*addIndices)(VertexArrayObject* const vao, size_t array_size, unsigned* array);
     void (*drawElements)(VertexArrayObject* const vao, unsigned type);

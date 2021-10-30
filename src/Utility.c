@@ -15,14 +15,14 @@ struct GlobalManager globalManagerInit()
     manager.object = objectManagerInit();
     manager.time = timeManagerInit();
     manager.vao = vertexArrayObjectManagerInit();
-    manager.vertexArray = vertexArrayManagerInit();
     manager.objects = objectsManagerInit();
     manager.mainPlayer = mainPlayerManagerInit();
-    manager.screen = screenManagerInit();
     manager.asciiWorld = asciiWorldManagerInit();
     manager.image = imageManagerInit();
     manager.texture = textureManagerInit();
-    manager.inventoryIcon = inventoryIconsManagerInit();
+    manager.canvas = canvasManagerInit();
+    manager.button = buttonManagerInit();
+    manager.menu = menuManagerInit();
 
     return manager;
 }

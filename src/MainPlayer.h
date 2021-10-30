@@ -18,14 +18,11 @@ typedef struct MainPlayer
 typedef struct MainPlayerManager
 {
     void (*init)(MainPlayer* const player, vec3 position, vec3 size, float speed);
-    void (*perspective)(MainPlayer* const player, float radian, float aspect, float nearZ, float farZ);
     void (*vertMove)(MainPlayer* const player, float gravity);
     void (*control)(MainPlayer* const player, WindowGL* const window, bool x, bool y, bool z);
     void (*update)(MainPlayer* player, float time, AsciiWorld* const world, AsciiWorldManager* const manager);
-    void (*apply)(struct MainPlayer* const player,
-                  struct Program* const program,
-                  const char* u_ProjectionView,
-                  struct ProgramManager* const manager);
+    void (*getDirection)(MainPlayer* player, vec3 dir);
+    void (*getView)(MainPlayer* player, vec3 pos, vec3 dir, vec3 up);
 } MainPlayerManager;
 
 MainPlayerManager mainPlayerManagerInit();

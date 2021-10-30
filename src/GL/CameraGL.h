@@ -19,7 +19,6 @@ typedef struct CameraGL
     vec3 velocity;
     float yAngle, xAngle;
     float speed;
-    mat4 projection, view;
 } CameraGL;
 
 typedef struct CameraGLManager

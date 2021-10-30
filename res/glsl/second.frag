@@ -1,9 +1,12 @@
 #version 330
 
+in vec2 pass_uv;
+
 out vec4 color;
-uniform vec4 u_color;
+
+uniform sampler2D tex;
 
 void main()
 {
-	color = u_color;
+	color = texture(tex, pass_uv);
 }

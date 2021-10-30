@@ -90,6 +90,16 @@ static const float RectPosition[18] = {
     1.0f, 1.0f, 0.0f,
 };
 
+static const float RectUv[18] = {
+    0.0f, 0.0f,
+    1.0f, 0.0f,
+    0.0f, 1.0f,
+
+    1.0f, 0.0f,
+    0.0f, 1.0f,
+    1.0f, 1.0f,
+};
+
 static const float RectColor[24] = {
     0.0f, 0.0f, 0.0f, 0.5f,
     1.0f, 0.0f, 0.0f, 0.5f,
